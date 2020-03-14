@@ -28,12 +28,13 @@ fitness_tracker.obj: C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/incl
 fitness_tracker.obj: C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/time.h
 fitness_tracker.obj: C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/abi_prefix.h
 fitness_tracker.obj: C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/xlocale/_time.h
+fitness_tracker.obj: ../fitness_tracker.h
+fitness_tracker.obj: P:/Courses/ENCE361/labs/FitnessTracker/acc_reader.h
 fitness_tracker.obj: ../acc.h
 fitness_tracker.obj: ../i2c_driver.h
-fitness_tracker.obj: ../acc_reader.h
 fitness_tracker.obj: ../circBufT.h
 fitness_tracker.obj: ../buttons4.h
-fitness_tracker.obj: ../fitness_tracker.h
+fitness_tracker.obj: ../oled.h
 
 ../fitness_tracker.c: 
 C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/stdint.h: 
@@ -63,9 +64,10 @@ C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/stdarg.h:
 C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/time.h: 
 C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/abi_prefix.h: 
 C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/xlocale/_time.h: 
+../fitness_tracker.h: 
+P:/Courses/ENCE361/labs/FitnessTracker/acc_reader.h: 
 ../acc.h: 
 ../i2c_driver.h: 
-../acc_reader.h: 
 ../circBufT.h: 
 ../buttons4.h: 
-../fitness_tracker.h: 
+../oled.h: 

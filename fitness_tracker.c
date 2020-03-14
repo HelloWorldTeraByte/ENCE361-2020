@@ -12,12 +12,13 @@
 #include "driverlib/i2c.h"
 #include "../OrbitOLED/OrbitOLEDInterface.h"
 #include "utils/ustdlib.h"
+#include "fitness_tracker.h"
 #include "acc.h"
 #include "i2c_driver.h"
 #include "acc_reader.h"
 #include "circBufT.h"
 #include "buttons4.h"
-#include "fitness_tracker.h"
+#include "oled.h"
 
 static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
@@ -69,34 +70,6 @@ initClock (void)
     SysTickEnable();
 }
 
-/*********************************************************
- * initDisplay
- *********************************************************/
-void
-initDisplay (void)
-{
-    // Initialise the Orbit OLED display
-    OLEDInitialise ();
-}
-
-//*****************************************************************************
-// Function to display a changing message on the display.
-// The display has 4 rows of 16 characters, with 0, 0 at top left.
-//*****************************************************************************
-void
-displayUpdate (char *str1, char *str2, int16_t num, uint8_t charLine)
-{
-    char text_buffer[17];           //Display fits 16 characters wide.
-
-    // "Undraw" the previous contents of the line to be updated.
-    OLEDStringDraw ("                ", 0, charLine);
-    // Form a new string for the line.  The maximum width specified for the
-    //  number field ensures it is displayed right justified.
-    usnprintf(text_buffer, sizeof(text_buffer), "%s %s %3d", str1, str2, num);
-    // Update line on display.
-    OLEDStringDraw (text_buffer, 0, charLine);
-}
-
 int32_t
 mean_calc(int32_t sum)
 {
@@ -143,6 +116,12 @@ main (void)
     int32_t sum_x, sum_y, sum_z;
     vector3_t ref_ori;
     vector3_t acc_mean;
+    char oled_content[OLED_ROW_MAX][OLED_COL_MAX];
+
+    ustrncpy(oled_content[0], "yeet", 16);
+    ustrncpy(oled_content[1], "yaaah", 16);
+    ustrncpy(oled_content[2], "yasdffaaah", 16);
+    ustrncpy(oled_content[3], "adsfadsf", 16);
 
     initClock();
     initAccl();
@@ -157,9 +136,6 @@ main (void)
 
     // Enable interrupts to the processor.
     IntMasterEnable();
-
-
-    OLEDStringDraw ("Acc", 0, 0);
 
     while (1) {
         SysCtlDelay (SysCtlClockGet () / 150);
@@ -200,9 +176,11 @@ main (void)
 
         if(run_oled > RUN_OLED_MAX) {
             run_oled = 0;
-            displayUpdate ("Accl", "X", acc_mean.x - ref_ori.x , 1);
-            displayUpdate ("Accl", "Y", acc_mean.y - ref_ori.y , 2);
-            displayUpdate ("Accl", "Z", acc_mean.z - ref_ori.z , 3);
+
+            oled_update(oled_content);
+//            displayUpdate ("Accl", "X", acc_mean.x - ref_ori.x , 1);
+//            displayUpdate ("Accl", "Y", acc_mean.y - ref_ori.y , 2);
+//            displayUpdate ("Accl", "Z", acc_mean.z - ref_ori.z , 3);
         }
     }
 }

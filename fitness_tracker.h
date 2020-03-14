@@ -1,6 +1,8 @@
 #ifndef FITNESS_TRACKER_H_
 #define FITNESS_TRACKER_H_
 
+#include <acc_reader.h>
+
 // Time schedulers
 #define SYSTICK_RATE_HZ    100
 #define RUN_BTN_RATE_HZ    100

@@ -14,6 +14,7 @@ C_SRCS += \
 ../circBufT.c \
 ../fitness_tracker.c \
 ../i2c_driver.c \
+../oled.c \
 ../tm4c123gh6pm_startup_ccs.c \
 C:/ti/TivaWare_C_Series-2.1.4.178/utils/ustdlib.c 
 
@@ -23,6 +24,7 @@ C_DEPS += \
 ./circBufT.d \
 ./fitness_tracker.d \
 ./i2c_driver.d \
+./oled.d \
 ./tm4c123gh6pm_startup_ccs.d \
 ./ustdlib.d 
 
@@ -32,6 +34,7 @@ OBJS += \
 ./circBufT.obj \
 ./fitness_tracker.obj \
 ./i2c_driver.obj \
+./oled.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
 ./ustdlib.obj 
 
@@ -41,6 +44,7 @@ OBJS__QUOTED += \
 "circBufT.obj" \
 "fitness_tracker.obj" \
 "i2c_driver.obj" \
+"oled.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
 "ustdlib.obj" 
 
@@ -50,6 +54,7 @@ C_DEPS__QUOTED += \
 "circBufT.d" \
 "fitness_tracker.d" \
 "i2c_driver.d" \
+"oled.d" \
 "tm4c123gh6pm_startup_ccs.d" \
 "ustdlib.d" 
 
@@ -59,6 +64,7 @@ C_SRCS__QUOTED += \
 "../circBufT.c" \
 "../fitness_tracker.c" \
 "../i2c_driver.c" \
+"../oled.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
 "C:/ti/TivaWare_C_Series-2.1.4.178/utils/ustdlib.c" 
 
