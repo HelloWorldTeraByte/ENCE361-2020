@@ -23,8 +23,9 @@ static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
 static circBuf_t circbuf_z;
 
-static uint32_t acc_sample_cnt;
-static uint8_t b_should_acc_cnt;
+uint32_t run_btn;
+uint32_t run_oled;
+uint32_t run_acc;
 
 void
 acc_buff_write(void)
@@ -34,15 +35,14 @@ acc_buff_write(void)
     writeCircBuf (&circbuf_x, acc.x);
     writeCircBuf (&circbuf_y, acc.y);
     writeCircBuf (&circbuf_z, acc.z);
-
-    if(b_should_acc_cnt)
-        acc_sample_cnt++;
 }
 
 void
 SysTickIntHandler(void)
 {
-    acc_buff_write();
+    run_acc++;
+    run_btn++;
+    run_oled++;
 }
 
 /***********************************************************
@@ -104,7 +104,7 @@ mean_calc(int32_t sum)
 }
 
 vector3_t
-ref_ori_get(void)
+ref_ori_get(uint8_t startup)
 {
     uint16_t i;
     int32_t sum_x = 0;
@@ -113,15 +113,12 @@ ref_ori_get(void)
 
     vector3_t ref;
 
-   // for (i = 0; i < ACC_BUF_SIZE; i++) {
-   //     acc_buff_write();
-   // }
-
-    while(acc_sample_cnt < ACC_BUF_SIZE) {
-        continue;
+    if(startup) {
+        for (i = 0; i < ACC_BUF_SIZE; i++) {
+            acc_buff_write();
+            SysCtlDelay (SysCtlClockGet () / 100);
+        }
     }
-
-    b_should_acc_cnt = 0;
 
     for (i = 0; i < ACC_BUF_SIZE; i++) {
         sum_x = sum_x + readCircBuf (&circbuf_x);
@@ -146,8 +143,6 @@ main (void)
     int32_t sum_x, sum_y, sum_z;
     vector3_t ref_ori;
     vector3_t acc_mean;
-    b_should_acc_cnt = 1;
-    int8_t b_down_bttn = 0;
 
     initClock();
     initAccl();
@@ -158,26 +153,35 @@ main (void)
     initCircBuf(&circbuf_y, ACC_BUF_SIZE);
     initCircBuf(&circbuf_z, ACC_BUF_SIZE);
 
+    ref_ori = ref_ori_get(1);
+
     // Enable interrupts to the processor.
     IntMasterEnable();
 
-    ref_ori = ref_ori_get();
 
     OLEDStringDraw ("Acc", 0, 0);
 
     while (1) {
-        SysCtlDelay (SysCtlClockGet () / 6);
+        SysCtlDelay (SysCtlClockGet () / 150);
 
-        uint8_t butState;
-        updateButtons();
-        butState = checkButton(DOWN);
-        switch(butState) {
-        case PUSHED:
-           // b_down_bttn = 1;
-            break;
-        case RELEASED:
-            ref_ori = ref_ori_get();
-            break;
+        if(run_btn > RUN_BTN_MAX) {
+            run_btn = 0;
+            uint8_t butState;
+            updateButtons();
+            butState = checkButton(DOWN);
+            switch(butState) {
+            case PUSHED:
+               // b_down_bttn = 1;
+                break;
+            case RELEASED:
+                ref_ori = ref_ori_get(0);
+                break;
+            }
+        }
+
+        if(run_acc > RUN_ACC_MAX) {
+            run_acc = 0;
+            acc_buff_write();
         }
 
         sum_x = 0;
@@ -194,8 +198,11 @@ main (void)
         acc_mean.y = mean_calc(sum_y);
         acc_mean.z = mean_calc(sum_z);
 
-        displayUpdate ("Accl", "X", acc_mean.x - ref_ori.x , 1);
-        displayUpdate ("Accl", "Y", acc_mean.y - ref_ori.y , 2);
-        displayUpdate ("Accl", "Z", acc_mean.z - ref_ori.z , 3);
+        if(run_oled > RUN_OLED_MAX) {
+            run_oled = 0;
+            displayUpdate ("Accl", "X", acc_mean.x - ref_ori.x , 1);
+            displayUpdate ("Accl", "Y", acc_mean.y - ref_ori.y , 2);
+            displayUpdate ("Accl", "Z", acc_mean.z - ref_ori.z , 3);
+        }
     }
 }

@@ -1,35 +1,35 @@
 ******************************************************************************
                   TI ARM Linker PC v18.12.4                    
 ******************************************************************************
->> Linked Fri Mar 13 17:14:16 2020
+>> Linked Sat Mar 14 14:45:19 2020
 
 OUTPUT FILE NAME:   <FitnessTracker.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 000031e9
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000323d
 
 
 MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  FLASH                 00000000   00040000  0000390c  0003c6f4  R  X
-  SRAM                  20000000   00008000  00000908  000076f8  RW X
+  FLASH                 00000000   00040000  00003960  0003c6a0  R  X
+  SRAM                  20000000   00008000  0000090d  000076f3  RW X
 
 
 SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    00003910   00003910    r-x
+00000000    00000000    00003960   00003960    r-x
   00000000    00000000    0000026c   0000026c    r-- .intvecs
-  0000026c    0000026c    000031bc   000031bc    r-x .text
-  00003428    00003428    0000049c   0000049c    r-- .const
-  000038c8    000038c8    00000048   00000048    r-- .cinit
-20000000    20000000    0000090c   00000000    rw-
+  0000026c    0000026c    00003210   00003210    r-x .text
+  0000347c    0000347c    0000049c   0000049c    r-- .const
+  00003918    00003918    00000048   00000048    r-- .cinit
+20000000    20000000    00000914   00000000    rw-
   20000000    20000000    0000026c   00000000    rw- .vtable
-  2000026c    2000026c    00000388   00000000    rw- .bss
-  200005f8    200005f8    00000200   00000000    rw- .stack
-  200007f8    200007f8    00000100   00000000    rw- .sysmem
-  200008f8    200008f8    00000014   00000000    rw- .data
+  2000026c    2000026c    0000038d   00000000    rw- .bss
+  20000600    20000600    00000200   00000000    rw- .stack
+  20000800    20000800    00000100   00000000    rw- .sysmem
+  20000900    20000900    00000014   00000000    rw- .data
 
 
 SECTION ALLOCATION MAP
@@ -40,96 +40,96 @@ section   page    origin      length       input sections
 .intvecs   0    00000000    0000026c     
                   00000000    0000026c     tm4c123gh6pm_startup_ccs.obj (.intvecs)
 
-.text      0    0000026c    000031bc     
+.text      0    0000026c    00003210     
                   0000026c    00000c84     ustdlib.obj (.text)
                   00000ef0    00000950     OrbitOledGrph.obj (.text)
                   00001840    0000037c     OrbitOled.obj (.text)
-                  00001bbc    000002e8     fitness_tracker.obj (.text)
-                  00001ea4    00000220     buttons4.obj (.text)
-                  000020c4    00000204     OrbitOledChar.obj (.text)
-                  000022c8    00000204     i2c_driver.obj (.text)
-                  000024cc    000001f0     acc_reader.obj (.text)
-                  000026bc    00000132     driverlib.lib : gpio.obj (.text:GPIOPadConfigSet)
-                  000027ee    00000002     rtsv7M4_T_le_v4SPD16_eabi.lib : _lock.c.obj (.text:_nop)
-                  000027f0    00000118     driverlib.lib : sysctl.obj (.text:SysCtlClockGet)
-                  00002908    00000118     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:aligned_alloc)
-                  00002a20    000000f4     driverlib.lib : sysctl.obj (.text:SysCtlClockSet)
-                  00002b14    000000e4     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:free)
-                  00002bf8    000000b8     circBufT.obj (.text)
-                  00002cb0    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.asm.obj (.text)
-                  00002d4c    0000007a                                   : memset_t2.asm.obj (.text)
-                  00002dc6    00000002                                   : div0.asm.obj (.text)
-                  00002dc8    00000070                                   : memory.c.obj (.text:split)
-                  00002e38    00000068                                   : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  00002ea0    00000060     driverlib.lib : timer.obj (.text:TimerConfigure)
-                  00002f00    0000005c     delay.obj (.text)
-                  00002f5c    00000050     driverlib.lib : sysctl.obj (.text:SysCtlPeripheralReset)
-                  00002fac    0000004c                   : gpio.obj (.text:GPIOPinConfigure)
-                  00002ff8    0000004c                   : i2c.obj (.text:I2CMasterInitExpClk)
-                  00003044    00000044     OrbitOLEDInterface.obj (.text)
-                  00003088    00000044     rtsv7M4_T_le_v4SPD16_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  000030cc    00000040                                   : u_divt2.asm.obj (.text)
-                  0000310c    0000003c     driverlib.lib : ssi.obj (.text:SSIConfigSetExpClk)
-                  00003148    00000038     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:calloc)
-                  00003180    00000034     driverlib.lib : interrupt.obj (.text:IntRegister)
-                  000031b4    00000034                   : sysctl.obj (.text:SysCtlPeripheralEnable)
-                  000031e8    00000034     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
-                  0000321c    0000002c     driverlib.lib : gpio.obj (.text:GPIODirModeSet)
-                  00003248    00000028     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:free_list_insert)
-                  00003270    0000001c     driverlib.lib : systick.obj (.text:SysTickIntRegister)
-                  0000328c    0000001c     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:free_list_remove)
-                  000032a8    00000018     driverlib.lib : gpio.obj (.text:GPIOPinTypeGPIOOutput)
-                  000032c0    00000016                   : gpio.obj (.text:GPIOPinTypeGPIOInput)
-                  000032d6    00000016                   : gpio.obj (.text:GPIOPinTypeI2C)
-                  000032ec    00000016                   : gpio.obj (.text:GPIOPinTypeI2CSCL)
-                  00003302    00000016                   : gpio.obj (.text:GPIOPinTypeSSI)
-                  00003318    00000014                   : systick.obj (.text:SysTickEnable)
-                  0000332c    00000014                   : systick.obj (.text:SysTickIntEnable)
-                  00003340    00000010                   : interrupt.obj (.text:IntMasterEnable)
-                  00003350    00000010                   : systick.obj (.text:SysTickPeriodSet)
-                  00003360    0000000e                   : timer.obj (.text:TimerEnable)
-                  0000336e    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0000337c    0000000c     driverlib.lib : cpu.obj (.text:CPUcpsie)
-                  00003388    0000000c                   : ssi.obj (.text:SSIDataGet)
-                  00003394    0000000c     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init)
-                  000033a0    0000000c     tm4c123gh6pm_startup_ccs.obj (.text)
-                  000033ac    0000000a     driverlib.lib : i2c.obj (.text:I2CMasterEnable)
-                  000033b6    0000000a                   : ssi.obj (.text:SSIDataPut)
-                  000033c0    0000000a                   : ssi.obj (.text:SSIEnable)
-                  000033ca    0000000a                   : timer.obj (.text:TimerValueGet)
-                  000033d4    00000008                   : i2c.obj (.text:I2CMasterBusBusy)
-                  000033dc    00000008                   : i2c.obj (.text:I2CMasterBusy)
-                  000033e4    00000008                   : i2c.obj (.text:I2CMasterSlaveAddrSet)
-                  000033ec    00000008                   : ssi.obj (.text:SSIBusy)
-                  000033f4    00000008     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:malloc)
-                  000033fc    00000006     driverlib.lib : gpio.obj (.text:GPIOPinRead)
-                  00003402    00000006                   : gpio.obj (.text:GPIOPinWrite)
-                  00003408    00000006                   : ssi.obj (.text:SSIClockSourceSet)
-                  0000340e    00000006                   : sysctl.obj (.text:SysCtlDelay)
-                  00003414    00000004                   : i2c.obj (.text:I2CMasterControl)
-                  00003418    00000004                   : i2c.obj (.text:I2CMasterDataGet)
-                  0000341c    00000004                   : i2c.obj (.text:I2CMasterDataPut)
-                  00003420    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
-                  00003424    00000004                                   : exit.c.obj (.text:abort:abort)
+                  00001bbc    0000033c     fitness_tracker.obj (.text)
+                  00001ef8    00000220     buttons4.obj (.text)
+                  00002118    00000204     OrbitOledChar.obj (.text)
+                  0000231c    00000204     i2c_driver.obj (.text)
+                  00002520    000001f0     acc_reader.obj (.text)
+                  00002710    00000132     driverlib.lib : gpio.obj (.text:GPIOPadConfigSet)
+                  00002842    00000002     rtsv7M4_T_le_v4SPD16_eabi.lib : _lock.c.obj (.text:_nop)
+                  00002844    00000118     driverlib.lib : sysctl.obj (.text:SysCtlClockGet)
+                  0000295c    00000118     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:aligned_alloc)
+                  00002a74    000000f4     driverlib.lib : sysctl.obj (.text:SysCtlClockSet)
+                  00002b68    000000e4     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:free)
+                  00002c4c    000000b8     circBufT.obj (.text)
+                  00002d04    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.asm.obj (.text)
+                  00002da0    0000007a                                   : memset_t2.asm.obj (.text)
+                  00002e1a    00000002                                   : div0.asm.obj (.text)
+                  00002e1c    00000070                                   : memory.c.obj (.text:split)
+                  00002e8c    00000068                                   : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00002ef4    00000060     driverlib.lib : timer.obj (.text:TimerConfigure)
+                  00002f54    0000005c     delay.obj (.text)
+                  00002fb0    00000050     driverlib.lib : sysctl.obj (.text:SysCtlPeripheralReset)
+                  00003000    0000004c                   : gpio.obj (.text:GPIOPinConfigure)
+                  0000304c    0000004c                   : i2c.obj (.text:I2CMasterInitExpClk)
+                  00003098    00000044     OrbitOLEDInterface.obj (.text)
+                  000030dc    00000044     rtsv7M4_T_le_v4SPD16_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  00003120    00000040                                   : u_divt2.asm.obj (.text)
+                  00003160    0000003c     driverlib.lib : ssi.obj (.text:SSIConfigSetExpClk)
+                  0000319c    00000038     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:calloc)
+                  000031d4    00000034     driverlib.lib : interrupt.obj (.text:IntRegister)
+                  00003208    00000034                   : sysctl.obj (.text:SysCtlPeripheralEnable)
+                  0000323c    00000034     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
+                  00003270    0000002c     driverlib.lib : gpio.obj (.text:GPIODirModeSet)
+                  0000329c    00000028     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:free_list_insert)
+                  000032c4    0000001c     driverlib.lib : systick.obj (.text:SysTickIntRegister)
+                  000032e0    0000001c     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:free_list_remove)
+                  000032fc    00000018     driverlib.lib : gpio.obj (.text:GPIOPinTypeGPIOOutput)
+                  00003314    00000016                   : gpio.obj (.text:GPIOPinTypeGPIOInput)
+                  0000332a    00000016                   : gpio.obj (.text:GPIOPinTypeI2C)
+                  00003340    00000016                   : gpio.obj (.text:GPIOPinTypeI2CSCL)
+                  00003356    00000016                   : gpio.obj (.text:GPIOPinTypeSSI)
+                  0000336c    00000014                   : systick.obj (.text:SysTickEnable)
+                  00003380    00000014                   : systick.obj (.text:SysTickIntEnable)
+                  00003394    00000010                   : interrupt.obj (.text:IntMasterEnable)
+                  000033a4    00000010                   : systick.obj (.text:SysTickPeriodSet)
+                  000033b4    0000000e                   : timer.obj (.text:TimerEnable)
+                  000033c2    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  000033d0    0000000c     driverlib.lib : cpu.obj (.text:CPUcpsie)
+                  000033dc    0000000c                   : ssi.obj (.text:SSIDataGet)
+                  000033e8    0000000c     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init)
+                  000033f4    0000000c     tm4c123gh6pm_startup_ccs.obj (.text)
+                  00003400    0000000a     driverlib.lib : i2c.obj (.text:I2CMasterEnable)
+                  0000340a    0000000a                   : ssi.obj (.text:SSIDataPut)
+                  00003414    0000000a                   : ssi.obj (.text:SSIEnable)
+                  0000341e    0000000a                   : timer.obj (.text:TimerValueGet)
+                  00003428    00000008                   : i2c.obj (.text:I2CMasterBusBusy)
+                  00003430    00000008                   : i2c.obj (.text:I2CMasterBusy)
+                  00003438    00000008                   : i2c.obj (.text:I2CMasterSlaveAddrSet)
+                  00003440    00000008                   : ssi.obj (.text:SSIBusy)
+                  00003448    00000008     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.text:malloc)
+                  00003450    00000006     driverlib.lib : gpio.obj (.text:GPIOPinRead)
+                  00003456    00000006                   : gpio.obj (.text:GPIOPinWrite)
+                  0000345c    00000006                   : ssi.obj (.text:SSIClockSourceSet)
+                  00003462    00000006                   : sysctl.obj (.text:SysCtlDelay)
+                  00003468    00000004                   : i2c.obj (.text:I2CMasterControl)
+                  0000346c    00000004                   : i2c.obj (.text:I2CMasterDataGet)
+                  00003470    00000004                   : i2c.obj (.text:I2CMasterDataPut)
+                  00003474    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  00003478    00000004                                   : exit.c.obj (.text:abort:abort)
 
-.const     0    00003428    0000049c     
-                  00003428    00000300     ChrFont0.obj (.const:.string:rgbOledFont0)
-                  00003728    00000090     driverlib.lib : gpio.obj (.const:g_pui32GPIOBaseAddrs)
-                  000037b8    0000006c                   : sysctl.obj (.const:g_pui32Xtals)
-                  00003824    00000040     FillPat.obj (.const:.string:rgbFillPat)
-                  00003864    00000030     ustdlib.obj (.const:g_psDaysToMonth)
-                  00003894    00000018     ustdlib.obj (.const:g_pfExponents)
-                  000038ac    00000012     ustdlib.obj (.const:.string)
-                  000038be    00000002     --HOLE-- [fill = 0]
-                  000038c0    00000004     ustdlib.obj (.const)
+.const     0    0000347c    0000049c     
+                  0000347c    00000300     ChrFont0.obj (.const:.string:rgbOledFont0)
+                  0000377c    00000090     driverlib.lib : gpio.obj (.const:g_pui32GPIOBaseAddrs)
+                  0000380c    0000006c                   : sysctl.obj (.const:g_pui32Xtals)
+                  00003878    00000040     FillPat.obj (.const:.string:rgbFillPat)
+                  000038b8    00000030     ustdlib.obj (.const:g_psDaysToMonth)
+                  000038e8    00000018     ustdlib.obj (.const:g_pfExponents)
+                  00003900    00000012     ustdlib.obj (.const:.string)
+                  00003912    00000002     --HOLE-- [fill = 0]
+                  00003914    00000004     ustdlib.obj (.const)
 
-.cinit     0    000038c8    00000048     
-                  000038c8    00000010     (.cinit..data.load) [load image, compression = lzss]
-                  000038d8    0000000c     (__TI_handler_table)
-                  000038e4    00000004     --HOLE-- [fill = 0]
-                  000038e8    00000008     (.cinit..bss.load) [load image, compression = zero_init]
-                  000038f0    00000008     (.cinit..vtable.load) [load image, compression = zero_init]
-                  000038f8    00000018     (__TI_cinit_table)
+.cinit     0    00003918    00000048     
+                  00003918    00000010     (.cinit..data.load) [load image, compression = lzss]
+                  00003928    0000000c     (__TI_handler_table)
+                  00003934    00000004     --HOLE-- [fill = 0]
+                  00003938    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00003940    00000008     (.cinit..vtable.load) [load image, compression = zero_init]
+                  00003948    00000018     (__TI_cinit_table)
 
 .init_array 
 *          0    00000000    00000000     UNINITIALIZED
@@ -137,48 +137,49 @@ section   page    origin      length       input sections
 .vtable    0    20000000    0000026c     UNINITIALIZED
                   20000000    0000026c     driverlib.lib : interrupt.obj (.vtable)
 
-.bss       0    2000026c    00000388     UNINITIALIZED
+.bss       0    2000026c    0000038d     UNINITIALIZED
                   2000026c    00000200     (.common:rgbOledBmp)
                   2000046c    00000100     (.common:rgbOledFontUser)
                   2000056c    00000010     fitness_tracker.obj (.bss:circbuf_x)
                   2000057c    00000010     fitness_tracker.obj (.bss:circbuf_y)
                   2000058c    00000010     fitness_tracker.obj (.bss:circbuf_z)
-                  2000059c    00000005     fitness_tracker.obj (.bss)
-                  200005a1    00000004     buttons4.obj (.bss:but_count)
-                  200005a5    00000004     buttons4.obj (.bss:but_flag)
-                  200005a9    00000004     buttons4.obj (.bss:but_normal)
-                  200005ad    00000004     buttons4.obj (.bss:but_state)
-                  200005b1    00000001     (.common:clrOledCur)
-                  200005b2    00000002     --HOLE--
-                  200005b4    00000004     (.common:bnOledCur)
-                  200005b8    00000004     (.common:dxcoOledFontCur)
-                  200005bc    00000004     (.common:dycoOledFontCur)
-                  200005c0    00000004     (.common:fOledCharUpdate)
-                  200005c4    00000004     (.common:modOledCur)
-                  200005c8    00000004     (.common:pbOledCur)
-                  200005cc    00000004     (.common:pbOledFontCur)
-                  200005d0    00000004     (.common:pbOledFontUser)
-                  200005d4    00000004     (.common:pbOledPatCur)
-                  200005d8    00000004     (.common:pfnDoRop)
-                  200005dc    00000004     (.common:xchOledCur)
-                  200005e0    00000004     (.common:xchOledMax)
-                  200005e4    00000004     (.common:xcoOledCur)
-                  200005e8    00000004     (.common:ychOledCur)
-                  200005ec    00000004     (.common:ychOledMax)
-                  200005f0    00000004     (.common:ycoOledCur)
+                  2000059c    00000004     buttons4.obj (.bss:but_count)
+                  200005a0    00000004     buttons4.obj (.bss:but_flag)
+                  200005a4    00000004     buttons4.obj (.bss:but_normal)
+                  200005a8    00000004     buttons4.obj (.bss:but_state)
+                  200005ac    00000004     (.common:bnOledCur)
+                  200005b0    00000004     (.common:dxcoOledFontCur)
+                  200005b4    00000004     (.common:dycoOledFontCur)
+                  200005b8    00000004     (.common:fOledCharUpdate)
+                  200005bc    00000004     (.common:modOledCur)
+                  200005c0    00000004     (.common:pbOledCur)
+                  200005c4    00000004     (.common:pbOledFontCur)
+                  200005c8    00000004     (.common:pbOledFontUser)
+                  200005cc    00000004     (.common:pbOledPatCur)
+                  200005d0    00000004     (.common:pfnDoRop)
+                  200005d4    00000004     (.common:run_acc)
+                  200005d8    00000004     (.common:run_btn)
+                  200005dc    00000004     (.common:run_oled)
+                  200005e0    00000004     (.common:xchOledCur)
+                  200005e4    00000004     (.common:xchOledMax)
+                  200005e8    00000004     (.common:xcoOledCur)
+                  200005ec    00000004     (.common:ychOledCur)
+                  200005f0    00000004     (.common:ychOledMax)
+                  200005f4    00000004     (.common:ycoOledCur)
+                  200005f8    00000001     (.common:clrOledCur)
 
-.stack     0    200005f8    00000200     UNINITIALIZED
-                  200005f8    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.stack)
-                  200005fc    000001fc     --HOLE--
+.stack     0    20000600    00000200     UNINITIALIZED
+                  20000600    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.stack)
+                  20000604    000001fc     --HOLE--
 
-.sysmem    0    200007f8    00000100     UNINITIALIZED
-                  200007f8    00000010     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.sysmem)
-                  20000808    000000f0     --HOLE--
+.sysmem    0    20000800    00000100     UNINITIALIZED
+                  20000800    00000010     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.c.obj (.sysmem)
+                  20000810    000000f0     --HOLE--
 
-.data      0    200008f8    00000014     UNINITIALIZED
-                  200008f8    00000008     rtsv7M4_T_le_v4SPD16_eabi.lib : _lock.c.obj (.data:$O1$$)
-                  20000900    00000008                                   : memory.c.obj (.data:$O1$$)
-                  20000908    00000004     ustdlib.obj (.data)
+.data      0    20000900    00000014     UNINITIALIZED
+                  20000900    00000008     rtsv7M4_T_le_v4SPD16_eabi.lib : _lock.c.obj (.data:$O1$$)
+                  20000908    00000008                                   : memory.c.obj (.data:$O1$$)
+                  20000910    00000004     ustdlib.obj (.data)
 
 MODULE SUMMARY
 
@@ -186,14 +187,14 @@ MODULE SUMMARY
        ------                         ----    -------   -------
     .\
        ustdlib.obj                    3204    94        4      
-       fitness_tracker.obj            744     0         53     
+       fitness_tracker.obj            828     0         60     
        tm4c123gh6pm_startup_ccs.obj   12      620       0      
        buttons4.obj                   544     0         16     
        i2c_driver.obj                 516     0         0      
        acc_reader.obj                 496     0         0      
        circBufT.obj                   184     0         0      
     +--+------------------------------+-------+---------+---------+
-       Total:                         5700    714       73     
+       Total:                         5784    714       80     
                                                                
     .\OrbitOLED\
        OrbitOLEDInterface.obj         68      0         0      
@@ -243,20 +244,20 @@ MODULE SUMMARY
        Stack:                         0       0         512    
        Linker Generated:              0       68        0      
     +--+------------------------------+-------+---------+---------+
-       Grand Total:                   12732   1866      2310   
+       Grand Total:                   12816   1866      2317   
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 000038f8 records: 3, size/record: 8, table size: 24
-	.data: load addr=000038c8, load size=00000010 bytes, run addr=200008f8, run size=00000014 bytes, compression=lzss
-	.bss: load addr=000038e8, load size=00000008 bytes, run addr=2000026c, run size=00000388 bytes, compression=zero_init
-	.vtable: load addr=000038f0, load size=00000008 bytes, run addr=20000000, run size=0000026c bytes, compression=zero_init
+__TI_cinit_table @ 00003948 records: 3, size/record: 8, table size: 24
+	.data: load addr=00003918, load size=00000010 bytes, run addr=20000900, run size=00000014 bytes, compression=lzss
+	.bss: load addr=00003938, load size=00000008 bytes, run addr=2000026c, run size=0000038d bytes, compression=zero_init
+	.vtable: load addr=00003940, load size=00000008 bytes, run addr=20000000, run size=0000026c bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 000038d8 records: 3, size/record: 4, table size: 12
+__TI_handler_table @ 00003928 records: 3, size/record: 4, table size: 12
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -266,52 +267,52 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 address   name                          
 -------   ----                          
-00003425  C$$EXIT                       
-0000337d  CPUcpsie                      
-00002f01  DelayInit                     
-00002f1b  DelayMs                       
-000022c9  Delay_us                      
-0000321d  GPIODirModeSet                
-000026bd  GPIOPadConfigSet              
-00002fad  GPIOPinConfigure              
-000033fd  GPIOPinRead                   
-000032c1  GPIOPinTypeGPIOInput          
-000032a9  GPIOPinTypeGPIOOutput         
-000032d7  GPIOPinTypeI2C                
-000032ed  GPIOPinTypeI2CSCL             
-00003303  GPIOPinTypeSSI                
-00003403  GPIOPinWrite                  
-000024ab  I2CGenIsNotIdle               
-000022fb  I2CGenTransmit                
-000033d5  I2CMasterBusBusy              
-000033dd  I2CMasterBusy                 
-00003415  I2CMasterControl              
-00003419  I2CMasterDataGet              
-0000341d  I2CMasterDataPut              
-000033ad  I2CMasterEnable               
-00002ff9  I2CMasterInitExpClk           
-000033e5  I2CMasterSlaveAddrSet         
-00003341  IntMasterEnable               
-00003181  IntRegister                   
-0000306b  OLEDInitialise                
-00003045  OLEDStringDraw                
-0000225d  OrbitOledAdvanceCursor        
+00003479  C$$EXIT                       
+000033d1  CPUcpsie                      
+00002f55  DelayInit                     
+00002f6f  DelayMs                       
+0000231d  Delay_us                      
+00003271  GPIODirModeSet                
+00002711  GPIOPadConfigSet              
+00003001  GPIOPinConfigure              
+00003451  GPIOPinRead                   
+00003315  GPIOPinTypeGPIOInput          
+000032fd  GPIOPinTypeGPIOOutput         
+0000332b  GPIOPinTypeI2C                
+00003341  GPIOPinTypeI2CSCL             
+00003357  GPIOPinTypeSSI                
+00003457  GPIOPinWrite                  
+000024ff  I2CGenIsNotIdle               
+0000234f  I2CGenTransmit                
+00003429  I2CMasterBusBusy              
+00003431  I2CMasterBusy                 
+00003469  I2CMasterControl              
+0000346d  I2CMasterDataGet              
+00003471  I2CMasterDataPut              
+00003401  I2CMasterEnable               
+0000304d  I2CMasterInitExpClk           
+00003439  I2CMasterSlaveAddrSet         
+00003395  IntMasterEnable               
+000031d5  IntRegister                   
+000030bf  OLEDInitialise                
+00003099  OLEDStringDraw                
+000022b1  OrbitOledAdvanceCursor        
 000017e1  OrbitOledClampXco             
 00001801  OrbitOledClampYco             
 00001a1d  OrbitOledClear                
 00001a29  OrbitOledClearBuffer          
-0000212d  OrbitOledDefUserChar          
+00002181  OrbitOledDefUserChar          
 00001999  OrbitOledDevInit              
 00001623  OrbitOledDrawChar             
-000021e5  OrbitOledDrawGlyph            
+00002239  OrbitOledDrawGlyph            
 00000fe7  OrbitOledDrawPixel            
 0000112d  OrbitOledDrawRect             
 00001683  OrbitOledDrawString           
 0000191f  OrbitOledDvrInit              
 000011b1  OrbitOledFillRect             
 000012f5  OrbitOledGetBmp               
-00002195  OrbitOledGetCharUpdate        
-00002111  OrbitOledGetCursor            
+000021e9  OrbitOledGetCharUpdate        
+00002165  OrbitOledGetCursor            
 00000fe1  OrbitOledGetDrawMode          
 00001013  OrbitOledGetPixel             
 00000f37  OrbitOledGetPos               
@@ -326,123 +327,126 @@ address   name
 00001741  OrbitOledMoveUp               
 00001455  OrbitOledPutBmp               
 00001ab3  OrbitOledPutBuffer            
-0000219b  OrbitOledPutChar              
-000021b9  OrbitOledPutString            
+000021ef  OrbitOledPutChar              
+0000220d  OrbitOledPutString            
 000016ef  OrbitOledRopAnd               
 000016cb  OrbitOledRopOr                
 000016a1  OrbitOledRopSet               
 00001713  OrbitOledRopXor               
-0000217d  OrbitOledSetCharUpdate        
-000020c5  OrbitOledSetCursor            
+000021d1  OrbitOledSetCharUpdate        
+00002119  OrbitOledSetCursor            
 00000f53  OrbitOledSetDrawColor         
 00000f8d  OrbitOledSetDrawMode          
 00000f7d  OrbitOledSetFillPattern       
 00001a59  OrbitOledUpdate               
-000033a1  ResetISR                      
-000033ed  SSIBusy                       
-00003409  SSIClockSourceSet             
-0000310d  SSIConfigSetExpClk            
-00003389  SSIDataGet                    
-000033b7  SSIDataPut                    
-000033c1  SSIEnable                     
+000033f5  ResetISR                      
+00003441  SSIBusy                       
+0000345d  SSIClockSourceSet             
+00003161  SSIConfigSetExpClk            
+000033dd  SSIDataGet                    
+0000340b  SSIDataPut                    
+00003415  SSIEnable                     
 00001b19  Ssi3PutByte                   
-000027f1  SysCtlClockGet                
-00002a21  SysCtlClockSet                
-0000340f  SysCtlDelay                   
-000031b5  SysCtlPeripheralEnable        
-00002f5d  SysCtlPeripheralReset         
-00003319  SysTickEnable                 
-0000332d  SysTickIntEnable              
-00001bf3  SysTickIntHandler             
-00003271  SysTickIntRegister            
-00003351  SysTickPeriodSet              
-00002ea1  TimerConfigure                
-00003361  TimerEnable                   
-000033cb  TimerValueGet                 
-200007f8  __STACK_END                   
+00002845  SysCtlClockGet                
+00002a75  SysCtlClockSet                
+00003463  SysCtlDelay                   
+00003209  SysCtlPeripheralEnable        
+00002fb1  SysCtlPeripheralReset         
+0000336d  SysTickEnable                 
+00003381  SysTickIntEnable              
+00001be5  SysTickIntHandler             
+000032c5  SysTickIntRegister            
+000033a5  SysTickPeriodSet              
+00002ef5  TimerConfigure                
+000033b5  TimerEnable                   
+0000341f  TimerValueGet                 
+20000800  __STACK_END                   
 00000200  __STACK_SIZE                  
-200007f8  __STACK_TOP                   
+20000800  __STACK_TOP                   
 00000100  __SYSMEM_SIZE                 
-000038f8  __TI_CINIT_Base               
-00003910  __TI_CINIT_Limit              
-000038d8  __TI_Handler_Table_Base       
-000038e4  __TI_Handler_Table_Limit      
-00003089  __TI_auto_init_nobinit_nopinit
-00002e39  __TI_decompress_lzss          
-0000336f  __TI_decompress_none          
+00003948  __TI_CINIT_Base               
+00003960  __TI_CINIT_Limit              
+00003928  __TI_Handler_Table_Base       
+00003934  __TI_Handler_Table_Limit      
+000030dd  __TI_auto_init_nobinit_nopinit
+00002e8d  __TI_decompress_lzss          
+000033c3  __TI_decompress_none          
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
 00000000  __TI_static_base__            
-00003395  __TI_zero_init                
-00002dc7  __aeabi_idiv0                 
-00002dc7  __aeabi_ldiv0                 
-00002d4d  __aeabi_memclr                
-00002d4d  __aeabi_memclr4               
-00002d4d  __aeabi_memclr8               
-00002cb1  __aeabi_memcpy                
-00002cb1  __aeabi_memcpy4               
-00002cb1  __aeabi_memcpy8               
-00002d4f  __aeabi_memset                
-00002d4f  __aeabi_memset4               
-00002d4f  __aeabi_memset8               
-000030cd  __aeabi_uidiv                 
-000030cd  __aeabi_uidivmod              
+000033e9  __TI_zero_init                
+00002e1b  __aeabi_idiv0                 
+00002e1b  __aeabi_ldiv0                 
+00002da1  __aeabi_memclr                
+00002da1  __aeabi_memclr4               
+00002da1  __aeabi_memclr8               
+00002d05  __aeabi_memcpy                
+00002d05  __aeabi_memcpy4               
+00002d05  __aeabi_memcpy8               
+00002da3  __aeabi_memset                
+00002da3  __aeabi_memset4               
+00002da3  __aeabi_memset8               
+00003121  __aeabi_uidiv                 
+00003121  __aeabi_uidivmod              
 ffffffff  __binit__                     
 ffffffff  __c_args__                    
 UNDEFED   __mpu_init                    
-200005f8  __stack                       
-000031e9  _c_int00_noargs               
-200008f8  _lock                         
-000027ef  _nop                          
-200007f8  _sys_memory                   
+20000600  __stack                       
+0000323d  _c_int00_noargs               
+20000900  _lock                         
+00002843  _nop                          
+20000800  _sys_memory                   
 UNDEFED   _system_post_cinit            
-00003421  _system_pre_init              
-200008fc  _unlock                       
-00003425  abort                         
+00003475  _system_pre_init              
+20000904  _unlock                       
+00003479  abort                         
 00001bbd  acc_buff_write                
-00002909  aligned_alloc                 
+0000295d  aligned_alloc                 
 ffffffff  binit                         
-200005b4  bnOledCur                     
-00003149  calloc                        
-00002047  checkButton                   
-200005b1  clrOledCur                    
-00001c29  displayUpdate                 
-200005b8  dxcoOledFontCur               
-200005bc  dycoOledFontCur               
-200005c0  fOledCharUpdate               
-00002b15  free                          
-00002c8b  freeCircBuf                   
+200005ac  bnOledCur                     
+0000319d  calloc                        
+0000209b  checkButton                   
+200005f8  clrOledCur                    
+00001c2d  displayUpdate                 
+200005b0  dxcoOledFontCur               
+200005b4  dycoOledFontCur               
+200005b8  fOledCharUpdate               
+00002b69  free                          
+00002cdf  freeCircBuf                   
 20000000  g_pfnRAMVectors               
 00000000  g_pfnVectors                  
-000025cd  getAcclData                   
-00002639  getAcclDataCmS2               
-000024cd  initAccl                      
-00001ea5  initButtons                   
-00002bf9  initCircBuf                   
-00001bfb  initClock                     
-00001c21  initDisplay                   
-00001d23  main                          
-000033f5  malloc                        
-00001c71  mean_calc                     
-00002909  memalign                      
-00002cb1  memcpy                        
-00002d55  memset                        
-200005c4  modOledCur                    
-200005c8  pbOledCur                     
-200005cc  pbOledFontCur                 
-200005d0  pbOledFontUser                
-200005d4  pbOledPatCur                  
-200005d8  pfnDoRop                      
-00002c57  readCircBuf                   
-00001c89  ref_ori_get                   
-00003824  rgbFillPat                    
+00002621  getAcclData                   
+0000268d  getAcclDataCmS2               
+00002521  initAccl                      
+00001ef9  initButtons                   
+00002c4d  initCircBuf                   
+00001bff  initClock                     
+00001c25  initDisplay                   
+00001d4d  main                          
+00003449  malloc                        
+00001c75  mean_calc                     
+0000295d  memalign                      
+00002d05  memcpy                        
+00002da9  memset                        
+200005bc  modOledCur                    
+200005c0  pbOledCur                     
+200005c4  pbOledFontCur                 
+200005c8  pbOledFontUser                
+200005cc  pbOledPatCur                  
+200005d0  pfnDoRop                      
+00002cab  readCircBuf                   
+00001c8d  ref_ori_get                   
+00003878  rgbFillPat                    
 2000026c  rgbOledBmp                    
-00003428  rgbOledFont0                  
+0000347c  rgbOledFont0                  
 2000046c  rgbOledFontUser               
+200005d4  run_acc                       
+200005d8  run_btn                       
+200005dc  run_oled                      
 00000751  ulocaltime                    
 0000094f  umktime                       
-00001f73  updateButtons                 
+00001fc7  updateButtons                 
 00000ec9  urand                         
 00000721  usnprintf                     
 000006ef  usprintf                      
@@ -457,13 +461,13 @@ ffffffff  binit
 00000afd  ustrtof                       
 000009c5  ustrtoul                      
 000002c5  uvsnprintf                    
-00002c23  writeCircBuf                  
-200005dc  xchOledCur                    
-200005e0  xchOledMax                    
-200005e4  xcoOledCur                    
-200005e8  ychOledCur                    
-200005ec  ychOledMax                    
-200005f0  ycoOledCur                    
+00002c77  writeCircBuf                  
+200005e0  xchOledCur                    
+200005e4  xchOledMax                    
+200005e8  xcoOledCur                    
+200005ec  ychOledCur                    
+200005f0  ychOledMax                    
+200005f4  ycoOledCur                    
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -526,140 +530,143 @@ address   name
 00001ab3  OrbitOledPutBuffer            
 00001b19  Ssi3PutByte                   
 00001bbd  acc_buff_write                
-00001bf3  SysTickIntHandler             
-00001bfb  initClock                     
-00001c21  initDisplay                   
-00001c29  displayUpdate                 
-00001c71  mean_calc                     
-00001c89  ref_ori_get                   
-00001d23  main                          
-00001ea5  initButtons                   
-00001f73  updateButtons                 
-00002047  checkButton                   
-000020c5  OrbitOledSetCursor            
-00002111  OrbitOledGetCursor            
-0000212d  OrbitOledDefUserChar          
-0000217d  OrbitOledSetCharUpdate        
-00002195  OrbitOledGetCharUpdate        
-0000219b  OrbitOledPutChar              
-000021b9  OrbitOledPutString            
-000021e5  OrbitOledDrawGlyph            
-0000225d  OrbitOledAdvanceCursor        
-000022c9  Delay_us                      
-000022fb  I2CGenTransmit                
-000024ab  I2CGenIsNotIdle               
-000024cd  initAccl                      
-000025cd  getAcclData                   
-00002639  getAcclDataCmS2               
-000026bd  GPIOPadConfigSet              
-000027ef  _nop                          
-000027f1  SysCtlClockGet                
-00002909  aligned_alloc                 
-00002909  memalign                      
-00002a21  SysCtlClockSet                
-00002b15  free                          
-00002bf9  initCircBuf                   
-00002c23  writeCircBuf                  
-00002c57  readCircBuf                   
-00002c8b  freeCircBuf                   
-00002cb1  __aeabi_memcpy                
-00002cb1  __aeabi_memcpy4               
-00002cb1  __aeabi_memcpy8               
-00002cb1  memcpy                        
-00002d4d  __aeabi_memclr                
-00002d4d  __aeabi_memclr4               
-00002d4d  __aeabi_memclr8               
-00002d4f  __aeabi_memset                
-00002d4f  __aeabi_memset4               
-00002d4f  __aeabi_memset8               
-00002d55  memset                        
-00002dc7  __aeabi_idiv0                 
-00002dc7  __aeabi_ldiv0                 
-00002e39  __TI_decompress_lzss          
-00002ea1  TimerConfigure                
-00002f01  DelayInit                     
-00002f1b  DelayMs                       
-00002f5d  SysCtlPeripheralReset         
-00002fad  GPIOPinConfigure              
-00002ff9  I2CMasterInitExpClk           
-00003045  OLEDStringDraw                
-0000306b  OLEDInitialise                
-00003089  __TI_auto_init_nobinit_nopinit
-000030cd  __aeabi_uidiv                 
-000030cd  __aeabi_uidivmod              
-0000310d  SSIConfigSetExpClk            
-00003149  calloc                        
-00003181  IntRegister                   
-000031b5  SysCtlPeripheralEnable        
-000031e9  _c_int00_noargs               
-0000321d  GPIODirModeSet                
-00003271  SysTickIntRegister            
-000032a9  GPIOPinTypeGPIOOutput         
-000032c1  GPIOPinTypeGPIOInput          
-000032d7  GPIOPinTypeI2C                
-000032ed  GPIOPinTypeI2CSCL             
-00003303  GPIOPinTypeSSI                
-00003319  SysTickEnable                 
-0000332d  SysTickIntEnable              
-00003341  IntMasterEnable               
-00003351  SysTickPeriodSet              
-00003361  TimerEnable                   
-0000336f  __TI_decompress_none          
-0000337d  CPUcpsie                      
-00003389  SSIDataGet                    
-00003395  __TI_zero_init                
-000033a1  ResetISR                      
-000033ad  I2CMasterEnable               
-000033b7  SSIDataPut                    
-000033c1  SSIEnable                     
-000033cb  TimerValueGet                 
-000033d5  I2CMasterBusBusy              
-000033dd  I2CMasterBusy                 
-000033e5  I2CMasterSlaveAddrSet         
-000033ed  SSIBusy                       
-000033f5  malloc                        
-000033fd  GPIOPinRead                   
-00003403  GPIOPinWrite                  
-00003409  SSIClockSourceSet             
-0000340f  SysCtlDelay                   
-00003415  I2CMasterControl              
-00003419  I2CMasterDataGet              
-0000341d  I2CMasterDataPut              
-00003421  _system_pre_init              
-00003425  C$$EXIT                       
-00003425  abort                         
-00003428  rgbOledFont0                  
-00003824  rgbFillPat                    
-000038d8  __TI_Handler_Table_Base       
-000038e4  __TI_Handler_Table_Limit      
-000038f8  __TI_CINIT_Base               
-00003910  __TI_CINIT_Limit              
+00001be5  SysTickIntHandler             
+00001bff  initClock                     
+00001c25  initDisplay                   
+00001c2d  displayUpdate                 
+00001c75  mean_calc                     
+00001c8d  ref_ori_get                   
+00001d4d  main                          
+00001ef9  initButtons                   
+00001fc7  updateButtons                 
+0000209b  checkButton                   
+00002119  OrbitOledSetCursor            
+00002165  OrbitOledGetCursor            
+00002181  OrbitOledDefUserChar          
+000021d1  OrbitOledSetCharUpdate        
+000021e9  OrbitOledGetCharUpdate        
+000021ef  OrbitOledPutChar              
+0000220d  OrbitOledPutString            
+00002239  OrbitOledDrawGlyph            
+000022b1  OrbitOledAdvanceCursor        
+0000231d  Delay_us                      
+0000234f  I2CGenTransmit                
+000024ff  I2CGenIsNotIdle               
+00002521  initAccl                      
+00002621  getAcclData                   
+0000268d  getAcclDataCmS2               
+00002711  GPIOPadConfigSet              
+00002843  _nop                          
+00002845  SysCtlClockGet                
+0000295d  aligned_alloc                 
+0000295d  memalign                      
+00002a75  SysCtlClockSet                
+00002b69  free                          
+00002c4d  initCircBuf                   
+00002c77  writeCircBuf                  
+00002cab  readCircBuf                   
+00002cdf  freeCircBuf                   
+00002d05  __aeabi_memcpy                
+00002d05  __aeabi_memcpy4               
+00002d05  __aeabi_memcpy8               
+00002d05  memcpy                        
+00002da1  __aeabi_memclr                
+00002da1  __aeabi_memclr4               
+00002da1  __aeabi_memclr8               
+00002da3  __aeabi_memset                
+00002da3  __aeabi_memset4               
+00002da3  __aeabi_memset8               
+00002da9  memset                        
+00002e1b  __aeabi_idiv0                 
+00002e1b  __aeabi_ldiv0                 
+00002e8d  __TI_decompress_lzss          
+00002ef5  TimerConfigure                
+00002f55  DelayInit                     
+00002f6f  DelayMs                       
+00002fb1  SysCtlPeripheralReset         
+00003001  GPIOPinConfigure              
+0000304d  I2CMasterInitExpClk           
+00003099  OLEDStringDraw                
+000030bf  OLEDInitialise                
+000030dd  __TI_auto_init_nobinit_nopinit
+00003121  __aeabi_uidiv                 
+00003121  __aeabi_uidivmod              
+00003161  SSIConfigSetExpClk            
+0000319d  calloc                        
+000031d5  IntRegister                   
+00003209  SysCtlPeripheralEnable        
+0000323d  _c_int00_noargs               
+00003271  GPIODirModeSet                
+000032c5  SysTickIntRegister            
+000032fd  GPIOPinTypeGPIOOutput         
+00003315  GPIOPinTypeGPIOInput          
+0000332b  GPIOPinTypeI2C                
+00003341  GPIOPinTypeI2CSCL             
+00003357  GPIOPinTypeSSI                
+0000336d  SysTickEnable                 
+00003381  SysTickIntEnable              
+00003395  IntMasterEnable               
+000033a5  SysTickPeriodSet              
+000033b5  TimerEnable                   
+000033c3  __TI_decompress_none          
+000033d1  CPUcpsie                      
+000033dd  SSIDataGet                    
+000033e9  __TI_zero_init                
+000033f5  ResetISR                      
+00003401  I2CMasterEnable               
+0000340b  SSIDataPut                    
+00003415  SSIEnable                     
+0000341f  TimerValueGet                 
+00003429  I2CMasterBusBusy              
+00003431  I2CMasterBusy                 
+00003439  I2CMasterSlaveAddrSet         
+00003441  SSIBusy                       
+00003449  malloc                        
+00003451  GPIOPinRead                   
+00003457  GPIOPinWrite                  
+0000345d  SSIClockSourceSet             
+00003463  SysCtlDelay                   
+00003469  I2CMasterControl              
+0000346d  I2CMasterDataGet              
+00003471  I2CMasterDataPut              
+00003475  _system_pre_init              
+00003479  C$$EXIT                       
+00003479  abort                         
+0000347c  rgbOledFont0                  
+00003878  rgbFillPat                    
+00003928  __TI_Handler_Table_Base       
+00003934  __TI_Handler_Table_Limit      
+00003948  __TI_CINIT_Base               
+00003960  __TI_CINIT_Limit              
 20000000  g_pfnRAMVectors               
 2000026c  rgbOledBmp                    
 2000046c  rgbOledFontUser               
-200005b1  clrOledCur                    
-200005b4  bnOledCur                     
-200005b8  dxcoOledFontCur               
-200005bc  dycoOledFontCur               
-200005c0  fOledCharUpdate               
-200005c4  modOledCur                    
-200005c8  pbOledCur                     
-200005cc  pbOledFontCur                 
-200005d0  pbOledFontUser                
-200005d4  pbOledPatCur                  
-200005d8  pfnDoRop                      
-200005dc  xchOledCur                    
-200005e0  xchOledMax                    
-200005e4  xcoOledCur                    
-200005e8  ychOledCur                    
-200005ec  ychOledMax                    
-200005f0  ycoOledCur                    
-200005f8  __stack                       
-200007f8  __STACK_END                   
-200007f8  __STACK_TOP                   
-200007f8  _sys_memory                   
-200008f8  _lock                         
-200008fc  _unlock                       
+200005ac  bnOledCur                     
+200005b0  dxcoOledFontCur               
+200005b4  dycoOledFontCur               
+200005b8  fOledCharUpdate               
+200005bc  modOledCur                    
+200005c0  pbOledCur                     
+200005c4  pbOledFontCur                 
+200005c8  pbOledFontUser                
+200005cc  pbOledPatCur                  
+200005d0  pfnDoRop                      
+200005d4  run_acc                       
+200005d8  run_btn                       
+200005dc  run_oled                      
+200005e0  xchOledCur                    
+200005e4  xchOledMax                    
+200005e8  xcoOledCur                    
+200005ec  ychOledCur                    
+200005f0  ychOledMax                    
+200005f4  ycoOledCur                    
+200005f8  clrOledCur                    
+20000600  __stack                       
+20000800  __STACK_END                   
+20000800  __STACK_TOP                   
+20000800  _sys_memory                   
+20000900  _lock                         
+20000904  _unlock                       
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
@@ -669,4 +676,4 @@ ffffffff  binit
 UNDEFED   __mpu_init                    
 UNDEFED   _system_post_cinit            
 
-[198 symbols]
+[201 symbols]
