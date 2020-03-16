@@ -35,6 +35,7 @@ fitness_tracker.obj: ../i2c_driver.h
 fitness_tracker.obj: ../circBufT.h
 fitness_tracker.obj: ../buttons4.h
 fitness_tracker.obj: ../oled.h
+fitness_tracker.obj: ../fsm.h
 
 ../fitness_tracker.c: 
 C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/stdint.h: 
@@ -71,3 +72,4 @@ P:/Courses/ENCE361/labs/FitnessTracker/acc_reader.h:
 ../circBufT.h: 
 ../buttons4.h: 
 ../oled.h: 
+../fsm.h: 

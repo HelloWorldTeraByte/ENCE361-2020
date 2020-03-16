@@ -19,6 +19,7 @@
 #include "circBufT.h"
 #include "buttons4.h"
 #include "oled.h"
+#include "fsm.h"
 
 static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
@@ -27,6 +28,7 @@ static circBuf_t circbuf_z;
 uint32_t run_btn;
 uint32_t run_oled;
 uint32_t run_acc;
+uint32_t run_fsm;
 
 void
 acc_buff_write(void)
@@ -44,6 +46,7 @@ SysTickIntHandler(void)
     run_acc++;
     run_btn++;
     run_oled++;
+    run_fsm++;
 }
 
 /***********************************************************
@@ -112,16 +115,19 @@ ref_ori_get(uint8_t startup)
 void
 main (void)
 {
+    enum states state = acc_data;
+    enum m1_states m1_state = raw_acceleration;
+
     uint16_t i;
     int32_t sum_x, sum_y, sum_z;
     vector3_t ref_ori;
     vector3_t acc_mean;
     char oled_content[OLED_ROW_MAX][OLED_COL_MAX];
 
-    ustrncpy(oled_content[0], "yeet", 16);
-    ustrncpy(oled_content[1], "yaaah", 16);
-    ustrncpy(oled_content[2], "yasdffaaah", 16);
-    ustrncpy(oled_content[3], "adsfadsf", 16);
+    ustrncpy(oled_content[0], "acceleration" , 16);
+    ustrncpy(oled_content[1], "accel x", 16);
+    ustrncpy(oled_content[2], "accel y", 16);
+    ustrncpy(oled_content[3], "accel z", 16);
 
     initClock();
     initAccl();
@@ -140,6 +146,16 @@ main (void)
     while (1) {
         SysCtlDelay (SysCtlClockGet () / 150);
 
+        if(run_acc > RUN_ACC_MAX) {
+           run_acc = 0;
+           acc_buff_write();
+        }
+
+        if(run_fsm > RUN_FSM_MAX) {
+            state_update(&state, &m1_state, oled_content, acc_mean);
+        }
+
+
         if(run_btn > RUN_BTN_MAX) {
             run_btn = 0;
             uint8_t butState;
@@ -153,11 +169,6 @@ main (void)
                 ref_ori = ref_ori_get(0);
                 break;
             }
-        }
-
-        if(run_acc > RUN_ACC_MAX) {
-            run_acc = 0;
-            acc_buff_write();
         }
 
         sum_x = 0;
@@ -178,7 +189,7 @@ main (void)
             run_oled = 0;
 
             oled_update(oled_content);
-//            displayUpdate ("Accl", "X", acc_mean.x - ref_ori.x , 1);
+//            displayUpdate ("Accl", "X", acc _mean.x - ref_ori.x , 1);
 //            displayUpdate ("Accl", "Y", acc_mean.y - ref_ori.y , 2);
 //            displayUpdate ("Accl", "Z", acc_mean.z - ref_ori.z , 3);
         }

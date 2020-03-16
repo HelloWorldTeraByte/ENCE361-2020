@@ -13,6 +13,7 @@ C_SRCS += \
 ../buttons4.c \
 ../circBufT.c \
 ../fitness_tracker.c \
+../fsm.c \
 ../i2c_driver.c \
 ../oled.c \
 ../tm4c123gh6pm_startup_ccs.c \
@@ -23,6 +24,7 @@ C_DEPS += \
 ./buttons4.d \
 ./circBufT.d \
 ./fitness_tracker.d \
+./fsm.d \
 ./i2c_driver.d \
 ./oled.d \
 ./tm4c123gh6pm_startup_ccs.d \
@@ -33,6 +35,7 @@ OBJS += \
 ./buttons4.obj \
 ./circBufT.obj \
 ./fitness_tracker.obj \
+./fsm.obj \
 ./i2c_driver.obj \
 ./oled.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
@@ -43,6 +46,7 @@ OBJS__QUOTED += \
 "buttons4.obj" \
 "circBufT.obj" \
 "fitness_tracker.obj" \
+"fsm.obj" \
 "i2c_driver.obj" \
 "oled.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
@@ -53,6 +57,7 @@ C_DEPS__QUOTED += \
 "buttons4.d" \
 "circBufT.d" \
 "fitness_tracker.d" \
+"fsm.d" \
 "i2c_driver.d" \
 "oled.d" \
 "tm4c123gh6pm_startup_ccs.d" \
@@ -63,6 +68,7 @@ C_SRCS__QUOTED += \
 "../buttons4.c" \
 "../circBufT.c" \
 "../fitness_tracker.c" \
+"../fsm.c" \
 "../i2c_driver.c" \
 "../oled.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
