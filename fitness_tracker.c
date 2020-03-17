@@ -114,7 +114,7 @@ ref_ori_get(uint8_t startup)
  ********************************************************/
 void
 main (void)
-{
+  {
     enum states state = acc_data;
     enum m1_states m1_state = raw_acceleration;
 

@@ -2,6 +2,11 @@
 #define FSM_H_
 
 #include "oled.h"
+
+#define ACC_X_NOM 260.0
+#define ACC_Y_NOM 262.0
+#define ACC_Z_NOM 233.0
+
 enum states
 {
     acc_data, total_distance, set_goal

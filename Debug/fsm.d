@@ -35,6 +35,9 @@ fsm.obj: ../circBufT.h
 fsm.obj: ../buttons4.h
 fsm.obj: ../fsm.h
 fsm.obj: ../oled.h
+fsm.obj: C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/math.h
+fsm.obj: C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/_defs.h
+fsm.obj: C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/machine/_limits.h
 
 ../fsm.c: 
 C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/stdint.h: 
@@ -71,3 +74,6 @@ C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/xlocale/_time.h:
 ../buttons4.h: 
 ../fsm.h: 
 ../oled.h: 
+C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/math.h: 
+C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/_defs.h: 
+C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include/machine/_limits.h: 
