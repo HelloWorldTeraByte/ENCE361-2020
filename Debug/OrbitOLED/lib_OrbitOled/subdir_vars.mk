@@ -6,12 +6,12 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/ChrFont0.c \
-P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/FillPat.c \
-P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOled.c \
-P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOledChar.c \
-P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOledGrph.c \
-P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/delay.c 
+../OrbitOLED/lib_OrbitOled/ChrFont0.c \
+../OrbitOLED/lib_OrbitOled/FillPat.c \
+../OrbitOLED/lib_OrbitOled/OrbitOled.c \
+../OrbitOLED/lib_OrbitOled/OrbitOledChar.c \
+../OrbitOLED/lib_OrbitOled/OrbitOledGrph.c \
+../OrbitOLED/lib_OrbitOled/delay.c 
 
 C_DEPS += \
 ./OrbitOLED/lib_OrbitOled/ChrFont0.d \
@@ -46,11 +46,11 @@ C_DEPS__QUOTED += \
 "OrbitOLED\lib_OrbitOled\delay.d" 
 
 C_SRCS__QUOTED += \
-"P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/ChrFont0.c" \
-"P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/FillPat.c" \
-"P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOled.c" \
-"P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOledChar.c" \
-"P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOledGrph.c" \
-"P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/delay.c" 
+"../OrbitOLED/lib_OrbitOled/ChrFont0.c" \
+"../OrbitOLED/lib_OrbitOled/FillPat.c" \
+"../OrbitOLED/lib_OrbitOled/OrbitOled.c" \
+"../OrbitOLED/lib_OrbitOled/OrbitOledChar.c" \
+"../OrbitOLED/lib_OrbitOled/OrbitOledGrph.c" \
+"../OrbitOLED/lib_OrbitOled/delay.c" 
 
 

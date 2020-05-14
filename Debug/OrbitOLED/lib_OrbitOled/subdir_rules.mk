@@ -5,45 +5,10 @@
 SHELL = cmd.exe
 
 # Each subdirectory must supply rules for building sources it contributes
-OrbitOLED/lib_OrbitOled/ChrFont0.obj: P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/ChrFont0.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+OrbitOLED/lib_OrbitOled/%.obj: ../OrbitOLED/lib_OrbitOled/%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
 	@echo 'Building file: "$<"'
 	@echo 'Invoking: ARM Compiler'
-	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="P:/Courses/ENCE361/labs/FitnessTracker" --include_path="P:/Courses/ENCE361/labs" --include_path="C:/ti/TivaWare_C_Series-2.1.4.178" --include_path="C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="OrbitOLED/lib_OrbitOled/$(basename $(<F)).d_raw" --obj_directory="OrbitOLED/lib_OrbitOled" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: "$<"'
-	@echo ' '
-
-OrbitOLED/lib_OrbitOled/FillPat.obj: P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/FillPat.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
-	@echo 'Building file: "$<"'
-	@echo 'Invoking: ARM Compiler'
-	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="P:/Courses/ENCE361/labs/FitnessTracker" --include_path="P:/Courses/ENCE361/labs" --include_path="C:/ti/TivaWare_C_Series-2.1.4.178" --include_path="C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="OrbitOLED/lib_OrbitOled/$(basename $(<F)).d_raw" --obj_directory="OrbitOLED/lib_OrbitOled" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: "$<"'
-	@echo ' '
-
-OrbitOLED/lib_OrbitOled/OrbitOled.obj: P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOled.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
-	@echo 'Building file: "$<"'
-	@echo 'Invoking: ARM Compiler'
-	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="P:/Courses/ENCE361/labs/FitnessTracker" --include_path="P:/Courses/ENCE361/labs" --include_path="C:/ti/TivaWare_C_Series-2.1.4.178" --include_path="C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="OrbitOLED/lib_OrbitOled/$(basename $(<F)).d_raw" --obj_directory="OrbitOLED/lib_OrbitOled" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: "$<"'
-	@echo ' '
-
-OrbitOLED/lib_OrbitOled/OrbitOledChar.obj: P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOledChar.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
-	@echo 'Building file: "$<"'
-	@echo 'Invoking: ARM Compiler'
-	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="P:/Courses/ENCE361/labs/FitnessTracker" --include_path="P:/Courses/ENCE361/labs" --include_path="C:/ti/TivaWare_C_Series-2.1.4.178" --include_path="C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="OrbitOLED/lib_OrbitOled/$(basename $(<F)).d_raw" --obj_directory="OrbitOLED/lib_OrbitOled" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: "$<"'
-	@echo ' '
-
-OrbitOLED/lib_OrbitOled/OrbitOledGrph.obj: P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/OrbitOledGrph.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
-	@echo 'Building file: "$<"'
-	@echo 'Invoking: ARM Compiler'
-	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="P:/Courses/ENCE361/labs/FitnessTracker" --include_path="P:/Courses/ENCE361/labs" --include_path="C:/ti/TivaWare_C_Series-2.1.4.178" --include_path="C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="OrbitOLED/lib_OrbitOled/$(basename $(<F)).d_raw" --obj_directory="OrbitOLED/lib_OrbitOled" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: "$<"'
-	@echo ' '
-
-OrbitOLED/lib_OrbitOled/delay.obj: P:/Courses/ENCE361/labs/OrbitOLED/lib_OrbitOled/delay.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
-	@echo 'Building file: "$<"'
-	@echo 'Invoking: ARM Compiler'
-	"C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="P:/Courses/ENCE361/labs/FitnessTracker" --include_path="P:/Courses/ENCE361/labs" --include_path="C:/ti/TivaWare_C_Series-2.1.4.178" --include_path="C:/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.4.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="OrbitOLED/lib_OrbitOled/$(basename $(<F)).d_raw" --obj_directory="OrbitOLED/lib_OrbitOled" $(GEN_OPTS__FLAG) "$<"
+	"D:/Programs/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.3.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 -me --include_path="C:/Users/GGPC/Documents/Univeristy/Second_Pro/ENCE361/Projects/FitnessMonitor" --include_path="C:/Users/GGPC/Documents/Univeristy/Second_Pro/ENCE361/Projects/FitnessMonitor/OrbitOLED" --include_path="D:/Programs/ti/TivaWare_C_Series-2.1.4.178" --include_path="D:/Programs/ti/ccs920/ccs/tools/compiler/ti-cgt-arm_18.12.3.LTS/include" --define=ccs="ccs" --define=PART_TM4C123GH6PM -g --gcc --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="OrbitOLED/lib_OrbitOled/$(basename $(<F)).d_raw" --obj_directory="OrbitOLED/lib_OrbitOled" $(GEN_OPTS__FLAG) "$<"
 	@echo 'Finished building: "$<"'
 	@echo ' '
 

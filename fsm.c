@@ -38,7 +38,7 @@ void state_update(enum states *state, enum m1_states *m1_state,
         switch (*m1_state)
         {
         case raw_acceleration:
-            usnprintf(oled_content[0], sizeof(oled_content[1]), "Raw");
+            usnprintf(oled_content[0], sizeof(oled_content[1]), "Raw Data");
 
             usnprintf(oled_content[1], sizeof(oled_content[1]), "Acc X: %3d", acc_mean.x);
             usnprintf(oled_content[2], sizeof(oled_content[2]), "Acc Y: %3d", acc_mean.y);

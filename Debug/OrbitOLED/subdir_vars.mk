@@ -6,7 +6,7 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-P:/Courses/ENCE361/labs/OrbitOLED/OrbitOLEDInterface.c 
+../OrbitOLED/OrbitOLEDInterface.c 
 
 C_DEPS += \
 ./OrbitOLED/OrbitOLEDInterface.d 
@@ -21,6 +21,6 @@ C_DEPS__QUOTED += \
 "OrbitOLED\OrbitOLEDInterface.d" 
 
 C_SRCS__QUOTED += \
-"P:/Courses/ENCE361/labs/OrbitOLED/OrbitOLEDInterface.c" 
+"../OrbitOLED/OrbitOLEDInterface.c" 
 
 

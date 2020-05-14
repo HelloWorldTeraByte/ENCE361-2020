@@ -17,7 +17,7 @@ C_SRCS += \
 ../i2c_driver.c \
 ../oled.c \
 ../tm4c123gh6pm_startup_ccs.c \
-C:/ti/TivaWare_C_Series-2.1.4.178/utils/ustdlib.c 
+D:/Programs/ti/TivaWare_C_Series-2.1.4.178/utils/ustdlib.c 
 
 C_DEPS += \
 ./acc_reader.d \
@@ -72,6 +72,6 @@ C_SRCS__QUOTED += \
 "../i2c_driver.c" \
 "../oled.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
-"C:/ti/TivaWare_C_Series-2.1.4.178/utils/ustdlib.c" 
+"D:/Programs/ti/TivaWare_C_Series-2.1.4.178/utils/ustdlib.c" 
 
 
