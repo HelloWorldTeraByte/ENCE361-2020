@@ -87,6 +87,7 @@ ref_ori_get(uint8_t startup)
     int32_t sum_y = 0;
     int32_t sum_z = 0;
 
+    //Reference position
     vector3_t ref;
 
     if(startup) {
