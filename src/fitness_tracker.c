@@ -14,8 +14,7 @@
 #include "driverlib/gpio.h"
 #include "driverlib/i2c.h"
 
-//TODO: Bruhhh
-#include "../OrbitOLED/OrbitOLEDInterface.h"
+#include "OrbitOLED/OrbitOLEDInterface.h"
 
 #include "fitness_tracker.h"
 #include "acc.h"
