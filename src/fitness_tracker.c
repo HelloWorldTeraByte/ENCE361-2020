@@ -31,11 +31,14 @@ static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
 static circBuf_t circbuf_z;
 
-enum states state = steps;
-
 char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX];
 
-uint32_t acc_ticks, bk_proc_tick, disp_ticks;
+uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
+
+int32_t mean_calc(int32_t sum)
+{
+    return ((2 * sum + ACC_BUF_SIZE) / 2 / ACC_BUF_SIZE);
+}
 
 void acc_buff_write(void)
 {
@@ -46,17 +49,19 @@ void acc_buff_write(void)
     writeCircBuf(&circbuf_z, acc.z);
 }
 
-int32_t mean_calc(int32_t sum)
+void task_io_btns(void)
 {
-    return ((2 * sum + ACC_BUF_SIZE) / 2 / ACC_BUF_SIZE);
+    io_btns_ticks++;
+    updateButtons();
 }
 
-void task_acc()
+void task_acc(void)
 {
     acc_buff_write();
     acc_ticks++;
 }
-void task_bk_proc()
+
+void task_bk_proc(void)
 {
     uint16_t i;
     int32_t sum_x, sum_y, sum_z = 0;
@@ -73,32 +78,52 @@ void task_bk_proc()
     acc_mean.y = mean_calc(sum_y);
     acc_mean.z = mean_calc(sum_z);
 
-    state_update(&state, oled_buffer, acc_mean);
+    state_update(oled_buffer, 0);
     bk_proc_tick++;
 }
 
-void task_display()
+void task_display(void)
 {
     disp_ticks++;
 
     usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "acc: %d", acc_ticks);
     usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "bk: %d", bk_proc_tick);
     usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "dp: %d", disp_ticks);
+    usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "btn: %d", io_btns_ticks);
 
-    oled_update(oled_buffer);
+    //Display update is broken into smaller chunks
+    static enum dp_task_states dp_tsk_state = LINE0;
+    switch (dp_tsk_state)
+    {
+        case LINE0:
+            oled_update_line(oled_buffer[0], 0);
+            dp_tsk_state = LINE1;
+            break;
+        case LINE1:
+            oled_update_line(oled_buffer[1], 1);
+            dp_tsk_state = LINE2;
+            break;
+        case LINE2:
+            oled_update_line(oled_buffer[2], 2);
+            dp_tsk_state = LINE3;
+            break;
+        case LINE3:
+            oled_update_line(oled_buffer[3], 3);
+            dp_tsk_state = LINE0;
+        default:
+            break;
+    }
 }
 
-void fm_init()
+void fm_init(void)
 {
     //Disable the interupts to processor before setups
     IntMasterDisable();
 
     clock_init();
     fm_time_init();
-    kernel_init(MAX_NUM_TASKS);
     initAccl();
     initDisplay();
-
 
     initButtons();
 
@@ -115,8 +140,9 @@ void fm_init()
     IntMasterEnable();
 }
 
-void fm_add_tasks()
+void fm_add_tasks(void)
 {
+    kernel_task_add(task_io_btns, IO_BTNS_RUN_MS);
     kernel_task_add(task_acc, ACC_RUN_MS);
     kernel_task_add(task_bk_proc, BK_PROC_RUN_MS);
     kernel_task_add(task_display, DISPLAY_RUN_MS);
@@ -126,7 +152,7 @@ void main(void)
 {
     fm_init();
 
-    //ref_ori = ref_ori_get(1);
+    kernel_init(MAX_NUM_TASKS);
     fm_add_tasks();
     kernel_run();
 }

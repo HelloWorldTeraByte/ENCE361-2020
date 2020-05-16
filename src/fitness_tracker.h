@@ -4,26 +4,30 @@
 #include "acc_reader.h"
 #include "fm_time.h"
 
-#define MAX_NUM_TASKS 10
+#define MAX_NUM_TASKS 5
 
 // Time schedulers
-#define RUN_BTN_RATE_HZ    100
-#define RUN_ACC_RATE_HZ    100
-#define RUN_FSM_RATE_HZ    50
-#define RUN_OLED_RATE_HZ    5
-
 #define ACC_RUN_MS RUN_1MS
+#define IO_BTNS_RUN_MS RUN_1MS
 #define BK_PROC_RUN_MS RUN_10MS
 #define DISPLAY_RUN_MS RUN_100MS
 
-void initClock (void);
-void initDisplay (void);
-void SysTickIntHandler(void);
+enum dp_task_states
+{
+    LINE0, LINE1, LINE2, LINE3, LINE4
+};
 
-void displayUpdate (char *str1, char *str2, int16_t num, uint8_t charLine);
 
-void acc_buff_write(void);
+
 int32_t mean_calc(int32_t sum);
-vector3_t ref_ori_get(uint8_t startup);
+void acc_buff_write(void);
+
+void task_io_btns(void);
+void task_acc(void);
+void task_bk_proc(void);
+void task_display(void);
+
+void fm_init(void);
+void fm_add_tasks(void);
 
 #endif
