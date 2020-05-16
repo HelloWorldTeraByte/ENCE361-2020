@@ -26,6 +26,7 @@
 #include "fsm.h"
 #include "fm_time.h"
 #include "kernel.h"
+#include "pedometer.h"
 
 static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
@@ -34,6 +35,11 @@ static circBuf_t circbuf_z;
 char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX];
 
 uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
+int step_count = 0;
+int32_t acc_norm;
+vector3_t acc_mean;
+int flag = 0;
+int next_flag = 1;//jeremy
 
 int32_t mean_calc(int32_t sum)
 {
@@ -67,6 +73,7 @@ void task_bk_proc(void)
     int32_t sum_x = 0, sum_y = 0, sum_z = 0;
     //vector3_t ref_ori;
     vector3_t acc_mean;
+    int new_step_count = 0;
 
     for (i = 0; i < ACC_BUF_SIZE; i++) {
         sum_x = sum_x + readCircBuf(&circbuf_x);
@@ -77,6 +84,18 @@ void task_bk_proc(void)
     acc_mean.x = mean_calc(sum_x);
     acc_mean.y = mean_calc(sum_y);
     acc_mean.z = mean_calc(sum_z);
+
+    acc_norm = norm(acc_mean.x, acc_mean.y, acc_mean.z);//jeremy start
+
+    flag = acc_check(acc_norm);
+    next_flag = acc_check(acc_norm);
+    new_step_count = step_increment(flag, next_flag, step_count);
+    if (new_step_count > step_count)
+    {
+        step_count = new_step_count;
+        flag = 0;
+        next_flag = 1;//jeremy end
+    }
 
    usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "x: %d",  acc_mean.x);
    usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "y: %d",  acc_mean.y);
