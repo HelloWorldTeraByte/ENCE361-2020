@@ -11,7 +11,7 @@ typedef struct
 } task_t;
 
 int8_t kernel_init(uint16_t max_tasks);
-int8_t kernel_task_add(void *func_ptr, uint16_t interval);
+int8_t kernel_task_add(void (*func_ptr)(void), uint16_t interval);
 void kernel_run();
 
 #endif
