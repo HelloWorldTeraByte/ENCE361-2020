@@ -64,7 +64,7 @@ void task_acc(void)
 void task_bk_proc(void)
 {
     uint16_t i;
-    int32_t sum_x, sum_y, sum_z = 0;
+    int32_t sum_x = 0, sum_y = 0, sum_z = 0;
     //vector3_t ref_ori;
     vector3_t acc_mean;
 
@@ -78,6 +78,11 @@ void task_bk_proc(void)
     acc_mean.y = mean_calc(sum_y);
     acc_mean.z = mean_calc(sum_z);
 
+   usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "x: %d",  acc_mean.x);
+   usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "y: %d",  acc_mean.y);
+   usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "z: %d",  acc_mean.z);
+   usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "btn: %d", io_btns_ticks);
+
     state_update(oled_buffer, 0);
     bk_proc_tick++;
 }
@@ -85,11 +90,6 @@ void task_bk_proc(void)
 void task_display(void)
 {
     disp_ticks++;
-
-    usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "acc: %d", acc_ticks);
-    usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "bk: %d", bk_proc_tick);
-    usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "dp: %d", disp_ticks);
-    usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "btn: %d", io_btns_ticks);
 
     //Display update is broken into smaller chunks
     static enum dp_task_states dp_tsk_state = LINE0;

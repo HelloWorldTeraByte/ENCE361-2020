@@ -7,9 +7,9 @@
 #define MAX_NUM_TASKS 5
 
 // Time schedulers
-#define ACC_RUN_MS RUN_1MS
-#define IO_BTNS_RUN_MS RUN_1MS
-#define BK_PROC_RUN_MS RUN_10MS
+#define ACC_RUN_MS RUN_10MS
+#define IO_BTNS_RUN_MS RUN_10MS
+#define BK_PROC_RUN_MS RUN_100MS
 #define DISPLAY_RUN_MS RUN_100MS
 
 enum dp_task_states
