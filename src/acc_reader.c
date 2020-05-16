@@ -28,6 +28,7 @@
 #include "i2c_driver.h"
 #include "acc_reader.h"
 #include "circBufT.h"
+#include "fitness_tracker.h"
 
 /*********************************************************
  * initAccl

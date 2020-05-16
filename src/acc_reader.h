@@ -1,6 +1,8 @@
 #ifndef ACC_READER_H_
 #define ACC_READER_H_
 
+#include "circBufT.h"
+
 #define ACC_BUF_SIZE 10
 
 typedef struct{
@@ -12,6 +14,5 @@ typedef struct{
 void initAccl (void);
 vector3_t getAcclData (void);
 vector3_t getAcclDataCmS2 (void);
-vector3_t ref_ori_get(uint8_t startup);
-
+vector3_t acc_ref_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff, uint8_t startup);
 #endif
