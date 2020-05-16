@@ -1,23 +1,20 @@
 #ifndef FITNESS_TRACKER_H_
 #define FITNESS_TRACKER_H_
 
-#include <acc_reader.h>
+#include "acc_reader.h"
+#include "fm_time.h"
+
+#define MAX_NUM_TASKS 10
 
 // Time schedulers
-#define SYSTICK_RATE_HZ    100
 #define RUN_BTN_RATE_HZ    100
 #define RUN_ACC_RATE_HZ    100
 #define RUN_FSM_RATE_HZ    50
 #define RUN_OLED_RATE_HZ    5
 
-#define ACC_BUF_SIZE 10
-
-#define RUN_BTN_MAX SYSTICK_RATE_HZ/RUN_BTN_RATE_HZ
-#define RUN_ACC_MAX SYSTICK_RATE_HZ/RUN_ACC_RATE_HZ
-#define RUN_OLED_MAX SYSTICK_RATE_HZ/RUN_OLED_RATE_HZ
-#define RUN_FSM_MAX SYSTICK_RATE_HZ/RUN_FSM_RATE_HZ
-
-
+#define ACC_RUN_MS RUN_1MS
+#define BK_PROC_RUN_MS RUN_10MS
+#define DISPLAY_RUN_MS RUN_100MS
 
 void initClock (void);
 void initDisplay (void);

@@ -27,6 +27,7 @@
 #include "acc.h"
 #include "i2c_driver.h"
 #include "acc_reader.h"
+#include "circBufT.h"
 
 /*********************************************************
  * initAccl
@@ -125,4 +126,35 @@ getAcclDataCmS2 (void)
     acceleration_ms2.z = (981*acceleration_raw.z)/256;
 
     return acceleration_ms2;
+}
+
+vector3_t acc_ref_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff, uint8_t startup)
+{
+    uint16_t i;
+    int32_t sum_x = 0;
+    int32_t sum_y = 0;
+    int32_t sum_z = 0;
+
+    //Reference position
+    vector3_t ref;
+
+    if (startup) {
+        for (i = 0; i < ACC_BUF_SIZE; i++)
+        {
+            acc_buff_write();
+            SysCtlDelay(SysCtlClockGet() / 100);
+        }
+    }
+
+    for (i = 0; i < ACC_BUF_SIZE; i++) {
+        sum_x = sum_x + readCircBuf(x_buff);
+        sum_y = sum_y + readCircBuf(y_buff);
+        sum_z = sum_z + readCircBuf(z_buff);
+    }
+
+    ref.x = mean_calc(sum_x);
+    ref.y = mean_calc(sum_y);
+    ref.z = mean_calc(sum_z);
+
+    return ref;
 }

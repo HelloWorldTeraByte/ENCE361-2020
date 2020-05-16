@@ -2,6 +2,7 @@
 #define FSM_H_
 
 #include "oled.h"
+#include "acc_reader.h"
 
 #define ACC_X_NOM 260.0
 #define ACC_Y_NOM 262.0
@@ -9,15 +10,9 @@
 
 enum states
 {
-    acc_data, total_distance, set_goal
+    steps, distance
 };
 
-enum m1_states
-{
-    raw_acceleration, acceleration_g, acceleration_ms
-};
-
-void state_update(enum states *state, enum m1_states *m1_state,
-                  char oled_content[OLED_ROW_MAX][OLED_COL_MAX], vector3_t acc_mean);
+void state_update(enum states *state, char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], vector3_t acc_mean);
 
 #endif
