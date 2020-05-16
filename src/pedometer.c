@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define threshold 13350 //9.81 x 1.5 , or 9.8 x 1.5 = 14.7. The accelerometer sensitivity threshold. 257 x 1.5 = 385.5
+#define threshold 386 //9.81 x 1.5 , or 9.8 x 1.5 = 14.7. The accelerometer sensitivity threshold. 257 x 1.5 = 385.5
 #define norm_nom = 252 //norm_nom = (260 + 262 + 233) / 3 = 252
 int32_t acc_norm;
 

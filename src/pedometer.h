@@ -6,7 +6,7 @@
 
 
 #define norm_nom = 272
-#define threshold = 13350//386
+#define threshold = 386
 
 
 int32_t
