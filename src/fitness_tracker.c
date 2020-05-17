@@ -36,6 +36,7 @@ static circBuf_t circbuf_z;
 static char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX];
 static uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
 
+//TODO: overflow and negatives
 static uint32_t steps_count;
 static int32_t acc_norm;
 static uint8_t steps_flag = 0;

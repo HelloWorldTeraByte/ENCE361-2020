@@ -12,8 +12,7 @@
 #define BK_PROC_RUN_MS RUN_100MS
 #define DISPLAY_RUN_MS RUN_100MS
 
-#define STEPS_TO_KM 0.9
-#define KM_TO_MILES 1.609
+#define STEPS_TO_M 0.9
 
 enum dp_task_states
 {

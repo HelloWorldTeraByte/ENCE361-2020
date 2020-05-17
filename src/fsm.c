@@ -1,34 +1,35 @@
 #include <stdint.h>
+#include <math.h>
 #include "utils/ustdlib.h"
 #include "fsm.h"
 #include "fitness_tracker.h"
 #include "buttons4.h"
+#include "switches.h"
 #include "oled.h"
 
 void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
 {
-    //TODO: Use interger maths
-    uint32_t distance_km = STEPS_TO_KM * (*steps);
-    uint32_t distance_mile = KM_TO_MILES * distance_km;
+    uint32_t dist_m = round(STEPS_TO_M * (*steps));
 
     //Remain in memory out of the scope of the functions as states should be remembered
     static enum states state = STEPS;
     static enum distance_states dist_state = DISTANCE_KM;
 
     uint8_t up_btn_state, down_btn_state, left_btn_state, right_btn_state;
+    uint8_t testing_mode;
 
     up_btn_state = checkButton(UP);
     down_btn_state = checkButton(DOWN);
     left_btn_state = checkButton(LEFT);
     right_btn_state = checkButton(RIGHT);
+    testing_mode = check_testing_mode();
 
     switch (state)
     {
         case STEPS:
-            if (btn_check_held(DOWN)) {
+            if (btn_check_held(DOWN) && !testing_mode) {
                 *steps = 0;
-                distance_km = 0;
-                distance_mile = 0;
+                dist_m = 0;
             }
             //Output Logic
             usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Steps");
@@ -59,22 +60,51 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
                 default:
                     break;
             }
+            switch (up_btn_state)
+            {
+                case PUSHED:
+                    if (testing_mode) {
+                        *steps += TEST_MODE_STEP_INC;
+                        dist_m += TEST_MODE_M_INC;
+                    }
+                    break;
+                case RELEASED:
+                    break;
+                case NO_CHANGE:
+                    break;
+                default:
+                    break;
+            }
+            switch (down_btn_state)
+            {
+                case PUSHED:
+                    if (testing_mode) {
+                        *steps -= TEST_MODE_STEP_INC;
+                        dist_m -= TEST_MODE_M_INC;
+                    }
 
+                    break;
+                case RELEASED:
+                    break;
+                case NO_CHANGE:
+                    break;
+                default:
+                    break;
+            }
             break;
         case DISTANCE:
-            if(btn_check_held(DOWN)) {
+            if(btn_check_held(DOWN) && !testing_mode) {
                 *steps = 0;
-                distance_km = 0;
-                distance_mile = 0;
+                dist_m = 0;
             }
 
             if (dist_state == DISTANCE_KM) {
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance kms");
-                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%d", distance_km);
+                //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%f", 0.08);
             }
             else {
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance miles");
-                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%d", distance_mile);
+                //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%f", 0.08);
             }
 
             switch (right_btn_state)
@@ -104,10 +134,32 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
             switch (up_btn_state)
             {
                 case PUSHED:
-                    if (dist_state == DISTANCE_KM)
-                        dist_state = DISTANCE_MILE;
+                    if (testing_mode) {
+                        *steps += TEST_MODE_STEP_INC;
+                        dist_m += TEST_MODE_M_INC;
+                    }
                     else
-                        dist_state = DISTANCE_KM;
+                    {
+                        if (dist_state == DISTANCE_KM)
+                            dist_state = DISTANCE_MILE;
+                        else
+                            dist_state = DISTANCE_KM;
+                    }
+                    break;
+                case RELEASED:
+                    break;
+                case NO_CHANGE:
+                    break;
+                default:
+                    break;
+            }
+            switch (down_btn_state)
+            {
+                case PUSHED:
+                    if (testing_mode) {
+                        *steps -= TEST_MODE_STEP_INC;
+                        dist_m -= TEST_MODE_M_INC;
+                    }
                     break;
                 case RELEASED:
                     break;
@@ -120,4 +172,9 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
         default:
             break;
     }
+}
+
+uint8_t check_testing_mode()
+{
+    return switches_get(SW1);
 }
