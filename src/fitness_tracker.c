@@ -69,20 +69,6 @@ vector3_t acc_mean_get()
     return acc_mean;
 }
 
-void task_io_btns(void)
-{
-    io_btns_ticks++;
-    updateButtons();
-    switches_update();
-    usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "SW1: %d", switches_get(SW1));
-    usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "SW2: %d", switches_get(SW2));
-}
-
-void task_acc(void)
-{
-    acc_buff_write();
-    acc_ticks++;
-}
 void steps_count_update(vector3_t acc_mean)
 {
     uint32_t new_step_count = 0;
@@ -98,6 +84,22 @@ void steps_count_update(vector3_t acc_mean)
         steps_nxt_flag = 1;
     }
 }
+
+void task_io_btns(void)
+{
+    io_btns_ticks++;
+    updateButtons();
+    switches_update();
+    usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "SW1: %d", switches_get(SW1));
+    usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "SW2: %d", switches_get(SW2));
+}
+
+void task_acc(void)
+{
+    acc_buff_write();
+    acc_ticks++;
+}
+
 
 //Background processing is done in a round robin 
 void task_bk_proc(void)
