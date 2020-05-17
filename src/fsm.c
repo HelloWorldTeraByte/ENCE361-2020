@@ -7,7 +7,7 @@
 
 void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
 {
-    //TODO: Use interger maths
+    //TODO: Use integer maths
     uint32_t distance_km = STEPS_TO_KM * (*steps);
     uint32_t distance_mile = KM_TO_MILES * distance_km;
 
@@ -70,13 +70,12 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
 
             if (dist_state == DISTANCE_KM) {
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance kms");
-                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%d", distance_km);
+                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%2d.%3d", (int)(distance_km/100), (int)(1000*(distance_km/100 - (int)(distance_km/100))));
             }
             else {
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance miles");
-                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%d", distance_mile);
+                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%3d", distance_mile);
             }
-
             switch (right_btn_state)
             {
                 case PUSHED:

@@ -7,15 +7,15 @@
 
 int32_t acc_norm;
 
-uint8_t acc_thresh_check(int32_t acc_norm)
-{
-    uint8_t flag;
-    if (acc_norm < ACC_NORM_THRESHOLD)
-        flag = 1;
-    else
-        flag = 0;
-    return flag;
-}
+//uint8_t acc_thresh_check(int32_t acc_norm)
+//{
+//    uint8_t flag;
+//    if (acc_norm < ACC_NORM_THRESHOLD)
+//        flag = 1;
+//    else
+//        flag = 0;
+//    return flag;
+//}
 
 uint32_t steps_increment(uint8_t flag, uint8_t next_flag, uint32_t step_count)
 {

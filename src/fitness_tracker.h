@@ -14,6 +14,7 @@
 
 #define STEPS_TO_KM 0.9
 #define KM_TO_MILES 1.609
+#define ACC_NORM_THRESHOLD 386
 
 enum dp_task_states
 {
