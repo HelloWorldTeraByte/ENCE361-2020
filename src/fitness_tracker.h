@@ -12,12 +12,13 @@
 #define BK_PROC_RUN_MS RUN_100MS
 #define DISPLAY_RUN_MS RUN_100MS
 
+#define STEPS_TO_KM 0.9
+#define KM_TO_MILES 1.609
+
 enum dp_task_states
 {
     LINE0, LINE1, LINE2, LINE3, LINE4
 };
-
-
 
 int32_t mean_calc(int32_t sum);
 void acc_buff_write(void);

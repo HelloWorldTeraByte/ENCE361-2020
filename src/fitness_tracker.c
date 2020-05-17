@@ -31,9 +31,9 @@ static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
 static circBuf_t circbuf_z;
 
-char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX];
-
-uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
+static char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX];
+static uint32_t steps;
+static uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
 
 int32_t mean_calc(int32_t sum)
 {
@@ -61,6 +61,7 @@ void task_acc(void)
     acc_ticks++;
 }
 
+//Background processing is done in a round robin 
 void task_bk_proc(void)
 {
     uint16_t i;
@@ -78,12 +79,8 @@ void task_bk_proc(void)
     acc_mean.y = mean_calc(sum_y);
     acc_mean.z = mean_calc(sum_z);
 
-   usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "x: %d",  acc_mean.x);
-   usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "y: %d",  acc_mean.y);
-   usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "z: %d",  acc_mean.z);
-   usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "btn: %d", io_btns_ticks);
-
-    state_update(oled_buffer, 0);
+    steps++;
+    state_update(oled_buffer, &steps);
     bk_proc_tick++;
 }
 
