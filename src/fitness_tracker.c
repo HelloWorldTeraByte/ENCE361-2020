@@ -38,13 +38,8 @@ static uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
 
 static uint32_t steps_count;
 static int32_t acc_norm;
-static uint8_t flag = 0;
-static uint8_t next_flag = 1;
-
-int32_t mean_calc(int32_t sum)
-{
-    return ((2 * sum + ACC_BUF_SIZE) / 2 / ACC_BUF_SIZE);
-}
+static uint8_t steps_flag = 0;
+static uint8_t steps_nxt_flag = 1;
 
 void acc_buff_write(void)
 {
@@ -53,6 +48,25 @@ void acc_buff_write(void)
     writeCircBuf(&circbuf_x, acc.x);
     writeCircBuf(&circbuf_y, acc.y);
     writeCircBuf(&circbuf_z, acc.z);
+}
+
+vector3_t acc_mean_get()
+{
+    vector3_t acc_mean;
+    uint16_t i;
+    int32_t sum_x = 0, sum_y = 0, sum_z = 0;
+ 
+    for (i = 0; i < ACC_BUF_SIZE; i++) {
+        sum_x = sum_x + readCircBuf(&circbuf_x);
+        sum_y = sum_y + readCircBuf(&circbuf_y);
+        sum_z = sum_z + readCircBuf(&circbuf_z);
+    }
+
+    acc_mean.x = acc_mean_calc(sum_x);
+    acc_mean.y = acc_mean_calc(sum_y);
+    acc_mean.z = acc_mean_calc(sum_z);
+
+    return acc_mean;
 }
 
 void task_io_btns(void)
@@ -69,39 +83,19 @@ void task_acc(void)
     acc_buff_write();
     acc_ticks++;
 }
-
-vector3_t acc_mean_get()
-{
-    vector3_t acc_mean;
-    uint16_t i;
-    int32_t sum_x = 0, sum_y = 0, sum_z = 0;
- 
-    for (i = 0; i < ACC_BUF_SIZE; i++) {
-        sum_x = sum_x + readCircBuf(&circbuf_x);
-        sum_y = sum_y + readCircBuf(&circbuf_y);
-        sum_z = sum_z + readCircBuf(&circbuf_z);
-    }
-
-    acc_mean.x = mean_calc(sum_x);
-    acc_mean.y = mean_calc(sum_y);
-    acc_mean.z = mean_calc(sum_z);
-
-    return acc_mean;
-}
-
 void steps_count_update(vector3_t acc_mean)
 {
     uint32_t new_step_count = 0;
-    acc_norm = norm(acc_mean.x, acc_mean.y, acc_mean.z); 
+    acc_norm = acc_norm_calc(acc_mean.x, acc_mean.y, acc_mean.z); 
 
-    flag = acc_check(acc_norm);
-    next_flag = acc_check(acc_norm);
-    new_step_count = step_increment(flag, next_flag, steps_count);
+    steps_flag = acc_thresh_check(acc_norm);
+    steps_nxt_flag = acc_thresh_check(acc_norm);
+    new_step_count = steps_increment(steps_flag, steps_nxt_flag, steps_count);
 
     if (new_step_count > steps_count) {
         steps_count = new_step_count;
-        flag = 0;
-        next_flag = 1;
+        steps_flag = 0;
+        steps_nxt_flag = 1;
     }
 }
 

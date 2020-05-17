@@ -28,7 +28,7 @@
 #include "i2c_driver.h"
 #include "acc_reader.h"
 #include "circBufT.h"
-#include "fitness_tracker.h"
+#include "pedometer.h"
 
 /*********************************************************
  * initAccl
@@ -153,9 +153,9 @@ vector3_t acc_ref_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff, u
         sum_z = sum_z + readCircBuf(z_buff);
     }
 
-    ref.x = mean_calc(sum_x);
-    ref.y = mean_calc(sum_y);
-    ref.z = mean_calc(sum_z);
+    ref.x = acc_mean_calc(sum_x);
+    ref.y = acc_mean_calc(sum_y);
+    ref.z = acc_mean_calc(sum_z);
 
     return ref;
 }
