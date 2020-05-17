@@ -34,6 +34,9 @@ static uint8_t but_count[NUM_BUTS];
 static bool but_flag[NUM_BUTS];
 static bool but_normal[NUM_BUTS];   // Corresponds to the electrical state
 
+static uint8_t btn_held[NUM_BUTS];
+static uint8_t btn_held_cnt[NUM_BUTS];
+
 // *******************************************************
 // initButtons: Initialise the variables associated with the set of buttons
 // defined by the constants in the buttons2.h header file.
@@ -117,6 +120,20 @@ updateButtons (void)
         }
         else
         	but_count[i] = 0;
+
+         //If the button is not in normal state it is being triggered
+         if(but_state[i] != but_normal[i]) {
+            btn_held_cnt[i]++;
+            if(btn_held_cnt[i] >= NUM_BTN_HELD_POL) {
+               btn_held[i] = 1;
+               btn_held_cnt[i] = 0;
+            }
+         }
+         else
+            btn_held_cnt[i] = 0;
+         if(but_state[i] == RELEASED) {
+               btn_held[i] = 0;
+         }
 	}
 }
 
@@ -138,3 +155,7 @@ checkButton (uint8_t butName)
 	return NO_CHANGE;
 }
 
+uint8_t btn_check_held(uint8_t btn)
+{
+   return btn_held[btn];
+}
