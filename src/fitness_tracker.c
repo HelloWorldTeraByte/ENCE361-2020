@@ -27,14 +27,19 @@
 #include "switches.h"
 #include "fsm.h"
 #include "oled.h"
+#include "pedometer.h"
 
 static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
 static circBuf_t circbuf_z;
 
 static char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX];
-static uint32_t steps;
 static uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
+
+static uint32_t steps_count;
+static int32_t acc_norm;
+static uint8_t flag = 0;
+static uint8_t next_flag = 1;
 
 int32_t mean_calc(int32_t sum)
 {
@@ -65,14 +70,12 @@ void task_acc(void)
     acc_ticks++;
 }
 
-//Background processing is done in a round robin 
-void task_bk_proc(void)
+vector3_t acc_mean_get()
 {
+    vector3_t acc_mean;
     uint16_t i;
     int32_t sum_x = 0, sum_y = 0, sum_z = 0;
-    //vector3_t ref_ori;
-    vector3_t acc_mean;
-
+ 
     for (i = 0; i < ACC_BUF_SIZE; i++) {
         sum_x = sum_x + readCircBuf(&circbuf_x);
         sum_y = sum_y + readCircBuf(&circbuf_y);
@@ -83,9 +86,35 @@ void task_bk_proc(void)
     acc_mean.y = mean_calc(sum_y);
     acc_mean.z = mean_calc(sum_z);
 
-    steps++;
-    state_update(oled_buffer, &steps);
-    bk_proc_tick++;
+    return acc_mean;
+}
+
+void steps_count_update(vector3_t acc_mean)
+{
+    uint32_t new_step_count = 0;
+    acc_norm = norm(acc_mean.x, acc_mean.y, acc_mean.z); 
+
+    flag = acc_check(acc_norm);
+    next_flag = acc_check(acc_norm);
+    new_step_count = step_increment(flag, next_flag, steps_count);
+
+    if (new_step_count > steps_count) {
+        steps_count = new_step_count;
+        flag = 0;
+        next_flag = 1;
+    }
+}
+
+//Background processing is done in a round robin 
+void task_bk_proc(void)
+{
+   //vector3_t ref_ori;
+   vector3_t acc_mean;
+   acc_mean = acc_mean_get();
+   steps_count_update(acc_mean);
+
+   state_update(oled_buffer, &steps_count);
+   bk_proc_tick++;
 }
 
 void task_display(void)
