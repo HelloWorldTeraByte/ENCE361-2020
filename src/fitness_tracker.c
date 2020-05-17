@@ -17,15 +17,16 @@
 #include "OrbitOLED/OrbitOLEDInterface.h"
 
 #include "fitness_tracker.h"
-#include "acc.h"
+#include "fm_time.h"
+#include "kernel.h"
 #include "i2c_driver.h"
+#include "acc.h"
 #include "acc_reader.h"
 #include "circBufT.h"
 #include "buttons4.h"
-#include "oled.h"
+#include "switches.h"
 #include "fsm.h"
-#include "fm_time.h"
-#include "kernel.h"
+#include "oled.h"
 
 static circBuf_t circbuf_x;
 static circBuf_t circbuf_y;
@@ -53,6 +54,9 @@ void task_io_btns(void)
 {
     io_btns_ticks++;
     updateButtons();
+    switches_update();
+    usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "SW1: %d", switches_get(SW1));
+    usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "SW2: %d", switches_get(SW2));
 }
 
 void task_acc(void)
@@ -123,6 +127,7 @@ void fm_init(void)
     initDisplay();
 
     initButtons();
+    switches_init();
 
     initCircBuf(&circbuf_x, ACC_BUF_SIZE);
     initCircBuf(&circbuf_y, ACC_BUF_SIZE);
