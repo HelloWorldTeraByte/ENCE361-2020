@@ -106,7 +106,6 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance miles");
                 //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%f", 0.08);
             }
-
             switch (right_btn_state)
             {
                 case PUSHED:

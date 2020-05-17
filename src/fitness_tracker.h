@@ -13,6 +13,7 @@
 #define DISPLAY_RUN_MS RUN_100MS
 
 #define STEPS_TO_M 0.9
+#define ACC_NORM_THRESHOLD 386
 
 enum dp_task_states
 {
