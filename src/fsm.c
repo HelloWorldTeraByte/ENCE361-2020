@@ -96,14 +96,14 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
 
             if (dist_state == DISTANCE_KM) {
                 uint32_t int_part = (int)((*steps)*STEPS_TO_M/1000);
-                uint16_t dec_part = (int)(1000*((*steps)*STEPS_TO_M/1000 - (int)((*steps)*STEPS_TO_M/1000)));
+                uint16_t dec_part = (1000*((*steps)*STEPS_TO_M/1000 - (int)((*steps)*STEPS_TO_M/1000)));
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance kms");
                 usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%2d.%03d", int_part, dec_part);
                 //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%2d.%03d", (int)((*steps)*0.9/1000), (int)(1000*((*steps)*0.9/1000 - (int)((*steps)*0.9/1000))));
             }
             else {
                 uint32_t int_part = (int)((*steps)*STEPS_TO_M*KM_TO_MILE/1000);
-                uint16_t dec_part = (int)(1000*((*steps)*STEPS_TO_M*KM_TO_MILE/1000 - (int)((*steps)*STEPS_TO_M*KM_TO_MILE/1000)));
+                uint16_t dec_part = (1000*((*steps)*STEPS_TO_M*KM_TO_MILE/1000 - (int)((*steps)*STEPS_TO_M*KM_TO_MILE/1000)));
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance miles");
                 usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%2d.%03d", int_part, dec_part);
                 //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%f", 0.08);
