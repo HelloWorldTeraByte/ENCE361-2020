@@ -7,8 +7,6 @@
 #include "acc_reader.h"
 
 static int32_t acc_norm;
-static uint8_t steps_flag = 0;
-static uint8_t steps_nxt_flag = 1;
 static uint8_t acc_flag = 0;
 
 void steps_count_update(vector3_t acc_mean, uint32_t *steps_count)
