@@ -4,6 +4,8 @@
 #define OLED_ROW_MAX 4
 #define OLED_COL_MAX 17
 
+#define PARTIAL_OLED_UPDATE 0
+
 void initDisplay(void);
 
 void displayUpdate (char *str1, char *str2, int16_t num, uint8_t charLine);
