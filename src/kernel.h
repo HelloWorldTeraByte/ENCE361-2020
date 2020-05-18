@@ -15,4 +15,3 @@ int8_t kernel_task_add(void (*func_ptr)(void), uint16_t interval);
 void kernel_run();
 
 #endif
-
