@@ -37,22 +37,6 @@ static char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX];
 static uint32_t io_btns_ticks, acc_ticks, bk_proc_tick, disp_ticks;
 
 static uint32_t steps_count = 0;
-static int32_t acc_norm;
-static uint8_t steps_flag = 0;
-static uint8_t steps_nxt_flag = 1;
-static uint8_t acc_flag = 0;
-
-void steps_count_update(vector3_t acc_mean)
-{
-    acc_norm = acc_norm_calc(acc_mean.x, acc_mean.y, acc_mean.z);
-    if ((acc_norm > ACC_NORM_THRESHOLD) && acc_flag) {
-        steps_count++;
-        acc_flag = 0;
-    }
-    if ((acc_norm < ACC_NORM_THRESHOLD) && !acc_flag) {
-        acc_flag = 1;
-    }
-}
 
 void task_io_btns(void)
 {
@@ -73,7 +57,7 @@ void task_bk_proc(void)
    //vector3_t ref_ori;
    vector3_t acc_mean;
    acc_mean = acc_mean_get(&circbuf_x, &circbuf_y, &circbuf_z);
-   steps_count_update(acc_mean);
+   steps_count_update(acc_mean, &steps_count);
 
    state_update(oled_buffer, &steps_count);
    bk_proc_tick++;

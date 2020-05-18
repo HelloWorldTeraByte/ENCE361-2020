@@ -20,8 +20,6 @@ enum dp_task_states
     LINE0, LINE1, LINE2, LINE3, LINE4
 };
 
-void steps_count_update(vector3_t acc_mean);
-
 void task_io_btns(void);
 void task_acc(void);
 void task_bk_proc(void);
