@@ -33,8 +33,7 @@
 /*********************************************************
  * initAccl
  *********************************************************/
-void
-initAccl (void)
+void initAccl (void)
 {
     char    toAccl[] = {0, 0};  // parameter, value
 
@@ -97,8 +96,7 @@ initAccl (void)
 /********************************************************
  * Function to read accelerometer
  ********************************************************/
-vector3_t
-getAcclData (void)
+vector3_t getAcclData (void)
 {
     char    fromAccl[] = {0, 0, 0, 0, 0, 0, 0}; // starting address, placeholders for data to be read.
     vector3_t acceleration;
@@ -114,8 +112,7 @@ getAcclData (void)
     return acceleration;
 }
 
-vector3_t
-getAcclDataCmS2 (void)
+vector3_t getAcclDataCmS2 (void)
 {
     vector3_t acceleration_raw;
     vector3_t acceleration_ms2;
@@ -127,6 +124,34 @@ getAcclDataCmS2 (void)
     acceleration_ms2.z = (981*acceleration_raw.z)/256;
 
     return acceleration_ms2;
+}
+
+void acc_buff_write(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff)
+{
+    vector3_t acc = getAcclData();
+
+    writeCircBuf(x_buff, acc.x);
+    writeCircBuf(y_buff, acc.y);
+    writeCircBuf(z_buff, acc.z);
+}
+
+vector3_t acc_mean_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff)
+{
+    vector3_t acc_mean;
+    uint16_t i;
+    int32_t sum_x = 0, sum_y = 0, sum_z = 0;
+ 
+    for (i = 0; i < ACC_BUF_SIZE; i++) {
+        sum_x = sum_x + readCircBuf(x_buff);
+        sum_y = sum_y + readCircBuf(y_buff);
+        sum_z = sum_z + readCircBuf(z_buff);
+    }
+
+    acc_mean.x = acc_mean_calc(sum_x);
+    acc_mean.y = acc_mean_calc(sum_y);
+    acc_mean.z = acc_mean_calc(sum_z);
+
+    return acc_mean;
 }
 
 vector3_t acc_ref_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff, uint8_t startup)
@@ -142,7 +167,7 @@ vector3_t acc_ref_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff, u
     if (startup) {
         for (i = 0; i < ACC_BUF_SIZE; i++)
         {
-            acc_buff_write();
+            acc_buff_write(x_buff, y_buff, z_buff);
             SysCtlDelay(SysCtlClockGet() / 100);
         }
     }

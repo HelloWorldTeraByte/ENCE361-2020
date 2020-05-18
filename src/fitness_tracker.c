@@ -42,47 +42,16 @@ static uint8_t steps_flag = 0;
 static uint8_t steps_nxt_flag = 1;
 static uint8_t acc_flag = 0;
 
-void acc_buff_write(void)
-{
-    vector3_t acc = getAcclData();
-
-    writeCircBuf(&circbuf_x, acc.x);
-    writeCircBuf(&circbuf_y, acc.y);
-    writeCircBuf(&circbuf_z, acc.z);
-}
-
-vector3_t acc_mean_get()
-{
-    vector3_t acc_mean;
-    uint16_t i;
-    int32_t sum_x = 0, sum_y = 0, sum_z = 0;
- 
-    for (i = 0; i < ACC_BUF_SIZE; i++) {
-        sum_x = sum_x + readCircBuf(&circbuf_x);
-        sum_y = sum_y + readCircBuf(&circbuf_y);
-        sum_z = sum_z + readCircBuf(&circbuf_z);
-    }
-
-    acc_mean.x = acc_mean_calc(sum_x);
-    acc_mean.y = acc_mean_calc(sum_y);
-    acc_mean.z = acc_mean_calc(sum_z);
-
-    return acc_mean;
-}
-
 void steps_count_update(vector3_t acc_mean)
 {
-
     acc_norm = acc_norm_calc(acc_mean.x, acc_mean.y, acc_mean.z);
     if ((acc_norm > ACC_NORM_THRESHOLD) && acc_flag) {
-        steps_count += 100;
+        steps_count++;
         acc_flag = 0;
     }
-    if ((acc_norm < ACC_NORM_THRESHOLD) && !acc_flag){
+    if ((acc_norm < ACC_NORM_THRESHOLD) && !acc_flag) {
         acc_flag = 1;
     }
-
-
 }
 
 void task_io_btns(void)
@@ -90,23 +59,20 @@ void task_io_btns(void)
     io_btns_ticks++;
     updateButtons();
     switches_update();
-    usnprintf(oled_buffer[2], sizeof(oled_buffer[2]), "SW1: %d", switches_get(SW1));
-    usnprintf(oled_buffer[3], sizeof(oled_buffer[3]), "SW2: %d", switches_get(SW2));
 }
 
 void task_acc(void)
 {
-    acc_buff_write();
+    acc_buff_write(&circbuf_x, &circbuf_y, &circbuf_z);
     acc_ticks++;
 }
-
 
 //Background processing is done in a round robin 
 void task_bk_proc(void)
 {
    //vector3_t ref_ori;
    vector3_t acc_mean;
-   acc_mean = acc_mean_get();
+   acc_mean = acc_mean_get(&circbuf_x, &circbuf_y, &circbuf_z);
    steps_count_update(acc_mean);
 
    state_update(oled_buffer, &steps_count);
@@ -158,6 +124,7 @@ void fm_init(void)
     initCircBuf(&circbuf_y, ACC_BUF_SIZE);
     initCircBuf(&circbuf_z, ACC_BUF_SIZE);
 
+    //TODO: DO we need to?
     ustrncpy(oled_buffer[0], " ", 16);
     ustrncpy(oled_buffer[1], " ", 16);
     ustrncpy(oled_buffer[2], " ", 16);
