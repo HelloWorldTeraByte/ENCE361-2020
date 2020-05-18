@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <math.h>
 #include "utils/ustdlib.h"
 #include "fsm.h"
 #include "fitness_tracker.h"
@@ -9,8 +8,7 @@
 
 void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
 {
-    uint32_t dist_m = round(STEPS_TO_M * (*steps));
-
+    //TODO: Make them global
     //Remain in memory out of the scope of the functions as states should be remembered
     static enum states state = STEPS;
     static enum distance_states dist_state = DISTANCE_KM;
@@ -29,7 +27,6 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
         case STEPS:
             if (btn_check_held(DOWN) && !testing_mode) {
                 *steps = 0;
-                dist_m = 0;
             }
             //Output Logic
             usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Steps");
@@ -65,7 +62,6 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
                 case PUSHED:
                     if (testing_mode) {
                         *steps += TEST_MODE_STEP_INC;
-                        dist_m += TEST_MODE_M_INC;
                     }
                     break;
                 case RELEASED:
@@ -79,8 +75,7 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
             {
                 case PUSHED:
                     if (testing_mode) {
-                        *steps -= TEST_MODE_STEP_INC;
-                        dist_m -= TEST_MODE_M_INC;
+                        *steps -= TEST_MODE_STEP_DEC;
                     }
 
                     break;
@@ -95,15 +90,20 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
         case DISTANCE:
             if(btn_check_held(DOWN) && !testing_mode) {
                 *steps = 0;
-                dist_m = 0;
             }
 
             if (dist_state == DISTANCE_KM) {
+                uint32_t int_part = (int)((*steps)*STEPS_TO_M/1000);
+                uint16_t dec_part = (int)(1000*((*steps)*STEPS_TO_M/1000 - (int)((*steps)*STEPS_TO_M/1000)));
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance kms");
-                //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%f", 0.08);
+                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%2d.%03d", int_part, dec_part);
+                //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%2d.%03d", (int)((*steps)*0.9/1000), (int)(1000*((*steps)*0.9/1000 - (int)((*steps)*0.9/1000))));
             }
             else {
+                uint32_t int_part = (int)((*steps)*STEPS_TO_M*KM_TO_MILE/1000);
+                uint16_t dec_part = (int)(1000*((*steps)*STEPS_TO_M*KM_TO_MILE/1000 - (int)((*steps)*STEPS_TO_M*KM_TO_MILE/1000)));
                 usnprintf(oled_buffer[0], sizeof(oled_buffer[0]), "Distance miles");
+                usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%2d.%03d", int_part, dec_part);
                 //usnprintf(oled_buffer[1], sizeof(oled_buffer[1]), "%f", 0.08);
             }
             switch (right_btn_state)
@@ -135,7 +135,6 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
                 case PUSHED:
                     if (testing_mode) {
                         *steps += TEST_MODE_STEP_INC;
-                        dist_m += TEST_MODE_M_INC;
                     }
                     else
                     {
@@ -156,8 +155,7 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
             {
                 case PUSHED:
                     if (testing_mode) {
-                        *steps -= TEST_MODE_STEP_INC;
-                        dist_m -= TEST_MODE_M_INC;
+                        *steps -= TEST_MODE_STEP_DEC;
                     }
                     break;
                 case RELEASED:
