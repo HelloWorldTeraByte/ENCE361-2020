@@ -126,6 +126,11 @@ vector3_t getAcclDataCmS2 (void)
     return acceleration_ms2;
 }
 
+int32_t acc_mean_calc(int32_t sum)
+{
+    return ((2 * sum + ACC_BUF_SIZE) / 2 / ACC_BUF_SIZE);
+}
+
 void acc_buff_write(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff)
 {
     vector3_t acc = getAcclData();
