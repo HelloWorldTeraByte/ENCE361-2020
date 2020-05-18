@@ -6,13 +6,11 @@
 #include "switches.h"
 #include "oled.h"
 
+static enum states state = STEPS;
+static enum distance_states dist_state = DISTANCE_KM;
+
 void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
 {
-    //TODO: Make them global
-    //Remain in memory out of the scope of the functions as states should be remembered
-    static enum states state = STEPS;
-    static enum distance_states dist_state = DISTANCE_KM;
-
     uint8_t up_btn_state, down_btn_state, left_btn_state, right_btn_state;
     uint8_t testing_mode;
 
@@ -75,7 +73,11 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
             {
                 case PUSHED:
                     if (testing_mode) {
-                        *steps -= TEST_MODE_STEP_DEC;
+                        //Steps Cant go negative
+                        if(*steps >= TEST_MODE_STEP_DEC)
+                            *steps -= TEST_MODE_STEP_DEC;
+                        else
+                            *steps = 0;
                     }
 
                     break;
@@ -155,8 +157,12 @@ void state_update(char oled_buffer[OLED_ROW_MAX][OLED_COL_MAX], uint32_t *steps)
             {
                 case PUSHED:
                     if (testing_mode) {
-                        *steps -= TEST_MODE_STEP_DEC;
-                    }
+                        //Steps Cant go negative
+                        if (*steps >= TEST_MODE_STEP_DEC)
+                            *steps -= TEST_MODE_STEP_DEC;
+                        else
+                            *steps = 0;
+                     }
                     break;
                 case RELEASED:
                     break;
