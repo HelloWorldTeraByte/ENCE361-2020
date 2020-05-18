@@ -108,12 +108,6 @@ void fm_init(void)
     initCircBuf(&circbuf_y, ACC_BUF_SIZE);
     initCircBuf(&circbuf_z, ACC_BUF_SIZE);
 
-    //TODO: DO we need to?
-    ustrncpy(oled_buffer[0], " ", 16);
-    ustrncpy(oled_buffer[1], " ", 16);
-    ustrncpy(oled_buffer[2], " ", 16);
-    ustrncpy(oled_buffer[3], " ", 16);
-
     // Enable interrupts to the processor.
     IntMasterEnable();
 }
