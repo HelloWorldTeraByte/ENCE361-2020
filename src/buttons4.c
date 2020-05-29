@@ -121,7 +121,8 @@ updateButtons (void)
         else
         	but_count[i] = 0;
 
-         //If the button is not in normal state it is being triggered
+         /* Check if the button is being held down*/
+         /*If the button is not in normal state it is being triggered */
          if(but_state[i] != but_normal[i]) {
             btn_held_cnt[i]++;
             if(btn_held_cnt[i] >= NUM_BTN_HELD_POL) {

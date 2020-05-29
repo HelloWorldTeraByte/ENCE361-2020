@@ -30,9 +30,7 @@
 #include "circBufT.h"
 #include "pedometer.h"
 
-/*********************************************************
- * initAccl
- *********************************************************/
+/* Initialize the accelerometer*/
 void initAccl (void)
 {
     char    toAccl[] = {0, 0};  // parameter, value
@@ -112,6 +110,7 @@ vector3_t getAcclData (void)
     return acceleration;
 }
 
+/* Return the accelerometer data in cm*s-2 */
 vector3_t getAcclDataCmS2 (void)
 {
     vector3_t acceleration_raw;
@@ -119,6 +118,7 @@ vector3_t getAcclDataCmS2 (void)
 
     acceleration_raw = getAcclData();
 
+    /* Turn to meaningful units*/
     acceleration_ms2.x = (981*acceleration_raw.x)/256;
     acceleration_ms2.y = (981*acceleration_raw.y)/256;
     acceleration_ms2.z = (981*acceleration_raw.z)/256;
@@ -126,11 +126,13 @@ vector3_t getAcclDataCmS2 (void)
     return acceleration_ms2;
 }
 
+/* Mean from the sum passed */
 int32_t acc_mean_calc(int32_t sum)
 {
     return ((2 * sum + ACC_BUF_SIZE) / 2 / ACC_BUF_SIZE);
 }
 
+/* Write the the circular buffers*/
 void acc_buff_write(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff)
 {
     vector3_t acc = getAcclData();
@@ -140,6 +142,7 @@ void acc_buff_write(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff)
     writeCircBuf(z_buff, acc.z);
 }
 
+/* Calculate the mean stored in the circular buffers*/
 vector3_t acc_mean_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff)
 {
     vector3_t acc_mean;
@@ -159,6 +162,7 @@ vector3_t acc_mean_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff)
     return acc_mean;
 }
 
+/* Store the current reading and use it as reference; i.e. the position is used as reference*/
 vector3_t acc_ref_get(circBuf_t *x_buff, circBuf_t *y_buff, circBuf_t *z_buff, uint8_t startup)
 {
     uint16_t i;

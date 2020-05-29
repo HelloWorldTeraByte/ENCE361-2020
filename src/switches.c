@@ -10,6 +10,7 @@ static uint8_t sw_state[NUM_SW];
 static uint8_t sw_count[NUM_SW];
 static uint8_t sw_normal[NUM_SW];
 
+/* Initialize the switches IO*/
 void switches_init(void)
 {
     int i;
@@ -33,6 +34,7 @@ void switches_init(void)
     }
 }
 
+/* Poll the switches*/
 void switches_update(void)
 {
 	uint8_t sw_value[NUM_SW];
@@ -56,6 +58,7 @@ void switches_update(void)
     }
 }
 
+/* Get switch status from the last poll */
 uint8_t switches_get(uint8_t sw)
 {
     return sw_state[sw];
